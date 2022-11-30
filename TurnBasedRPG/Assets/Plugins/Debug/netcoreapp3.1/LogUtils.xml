@@ -1,0 +1,349 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>LogUtils</name>
+    </assembly>
+    <members>
+        <member name="T:LogUtils.LoggerType">
+            <summary>
+            输出日志的平台
+            </summary>
+        </member>
+        <member name="F:LogUtils.LoggerType.Unity">
+            <summary>
+            Unity编辑器
+            </summary>
+        </member>
+        <member name="F:LogUtils.LoggerType.Console">
+            <summary>
+            服务器
+            </summary>
+        </member>
+        <member name="T:LogUtils.LogCoLor">
+            <summary>
+            日志的颜色
+            </summary>
+        </member>
+        <member name="F:LogUtils.LogCoLor.None">
+            <summary>
+            空
+            </summary>
+        </member>
+        <member name="F:LogUtils.LogCoLor.DarkRed">
+            <summary>
+            深红
+            </summary>
+        </member>
+        <member name="F:LogUtils.LogCoLor.Green">
+            <summary>
+            绿色
+            </summary>
+        </member>
+        <member name="F:LogUtils.LogCoLor.Blue">
+            <summary>
+            蓝色
+            </summary>
+        </member>
+        <member name="F:LogUtils.LogCoLor.Cyan">
+            <summary>
+            青色
+            </summary>
+        </member>
+        <member name="F:LogUtils.LogCoLor.Magenta">
+            <summary>
+            紫色
+            </summary>
+        </member>
+        <member name="F:LogUtils.LogCoLor.DarkYellow">
+            <summary>
+            深黄
+            </summary>
+        </member>
+        <member name="T:LogUtils.LogConfig">
+            <summary>
+            日志配置
+            </summary>
+        </member>
+        <member name="F:LogUtils.LogConfig.enableLog">
+            <summary>
+            启用日志
+            </summary>
+        </member>
+        <member name="F:LogUtils.LogConfig.LogPrefix">
+            <summary>
+            日志前缀
+            </summary>
+        </member>
+        <member name="F:LogUtils.LogConfig.enableTime">
+            <summary>
+            启用时间
+            </summary>
+        </member>
+        <member name="F:LogUtils.LogConfig.LogSeparate">
+            <summary>
+            日志分离
+            </summary>
+        </member>
+        <member name="F:LogUtils.LogConfig.enableThreadID">
+            <summary>
+            启用线程ID
+            </summary>
+        </member>
+        <member name="F:LogUtils.LogConfig.enableTrace">
+            <summary>
+            启用跟踪
+            </summary>
+        </member>
+        <member name="F:LogUtils.LogConfig.enableSave">
+            <summary>
+            启用保存
+            </summary>
+        </member>
+        <member name="F:LogUtils.LogConfig.savePath">
+            <summary>
+            保存路径
+            </summary>
+        </member>
+        <member name="F:LogUtils.LogConfig.saveName">
+            <summary>
+            保存名称
+            </summary>
+        </member>
+        <member name="F:LogUtils.LogConfig.eLoggerType">
+            <summary>
+            日志类型
+            </summary>
+        </member>
+        <member name="F:LogUtils.LogConfig.enableCover">
+            <summary>
+            是否覆盖
+            </summary>
+        </member>
+        <member name="M:LogUtils.ILogger.Log(System.String,LogUtils.LogCoLor)">
+            <summary>
+            普通信息
+            </summary>
+            <param name="msg"></param>
+            <param name="LogCoLor"></param>
+        </member>
+        <member name="M:LogUtils.ILogger.Warn(System.String)">
+            <summary>
+            警告
+            </summary>
+            <param name="msg"></param>
+        </member>
+        <member name="M:LogUtils.ILogger.Error(System.String)">
+            <summary>
+            异常错误
+            </summary>
+            <param name="msg"></param>
+        </member>
+        <member name="T:LogUtils.PELog">
+            <summary>
+            日志
+            </summary>
+        </member>
+        <member name="T:LogUtils.PELog.ConsoleLogger">
+            <summary>
+            Log的包裹类
+            </summary>
+        </member>
+        <member name="M:LogUtils.PELog.ConsoleLogger.Log(System.String,LogUtils.LogCoLor)">
+            <summary>
+            打印Log信息
+            </summary>
+            <param name="msg">消息</param>
+            <param name="logCoLor">颜色</param>
+        </member>
+        <member name="F:LogUtils.PELog.cfg">
+            <summary>
+            配置文件
+            </summary>
+        </member>
+        <member name="F:LogUtils.PELog.logger">
+            <summary>
+            输出的日志类型
+            </summary>
+        </member>
+        <member name="M:LogUtils.PELog.InitSettings(LogUtils.LogConfig)">
+            <summary>
+            初始化设置
+            </summary>
+        </member>
+        <member name="M:LogUtils.PELog.Log(System.String,System.Object[])">
+            <summary>
+            打印日志
+            </summary>
+            <param name="msg"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:LogUtils.PELog.Log(System.Object)">
+            <summary>
+            打印日志
+            </summary>
+            <param name="obj"></param>
+        </member>
+        <member name="M:LogUtils.PELog.Log(LogUtils.LogCoLor,System.String,System.Object[])">
+            <summary>
+            打印带有颜色的日志
+            </summary>
+            <param name="logCoLorEnum">颜色</param>
+            <param name="msg">字符串</param>
+            <param name="args">消息</param>
+        </member>
+        <member name="M:LogUtils.PELog.Log(LogUtils.LogCoLor,System.Object)">
+            <summary>
+             打印带有颜色的日志
+            </summary>
+            <param name="logCoLorEnum">颜色</param>
+            <param name="obj">泛型</param>
+        </member>
+        <member name="M:LogUtils.PELog.Trace(System.String,System.Object[])">
+            <summary>
+            打印堆栈
+            </summary>
+            <param name="msg"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:LogUtils.PELog.Trace(System.Object)">
+            <summary>
+            打印堆栈
+            </summary>
+            <param name="obj"></param>
+        </member>
+        <member name="M:LogUtils.PELog.Warn(System.String,System.Object[])">
+            <summary>
+            打印警告日志
+            </summary>
+            <param name="msg"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:LogUtils.PELog.Warn(System.Object)">
+            <summary>
+            打印警告日志
+            </summary>
+            <param name="obj"></param>
+        </member>
+        <member name="M:LogUtils.PELog.Error(System.String,System.Object[])">
+            <summary>
+            打印错误日志
+            </summary>
+            <param name="msg"></param>
+            <param name="args"></param>
+        </member>
+        <member name="M:LogUtils.PELog.Error(System.Object)">
+            <summary>
+            打印错误日志
+            </summary>
+            <param name="obj"></param>
+        </member>
+        <member name="M:LogUtils.PELog.DecorateLog(System.String,System.Boolean)">
+            <summary>
+            日志打印
+            </summary>
+            <param name="msg"></param>
+            <param name="isTrace"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LogUtils.PELog.GetLogTrace">
+            <summary>
+            获取日志追踪
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LogUtils.PELog.GetThreadID">
+            <summary>
+            获取线程Id
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LogUtils.PELog.writeToFile(System.String)">
+            <summary>
+            日志写入文件
+            </summary>
+            <param name="msg"></param>
+        </member>
+        <member name="T:ExtensionMethonds">
+            <summary>
+            日志打印的拓展方法
+            </summary>
+        </member>
+        <member name="M:ExtensionMethonds.Log(System.Object,System.String,System.Object[])">
+            <summary>
+            打印日志
+            </summary>
+            <param name="obj">拓展的类型</param>
+            <param name="Log">字符串</param>
+            <param name="args">参数</param>
+        </member>
+        <member name="M:ExtensionMethonds.Log(System.Object,System.Object)">
+            <summary>
+            打印日志
+            </summary>
+            <param name="obj">拓展的类型</param>
+            <param name="Log">字符串</param>
+        </member>
+        <member name="M:ExtensionMethonds.Log(System.Object,LogUtils.LogCoLor,System.String,System.Object[])">
+            <summary>
+            打印带有颜色的日志
+            </summary>
+            <param name="obj">拓展的类型</param>
+            <param name="logCoLorEnum">颜色</param>
+            <param name="Log">字符串</param>
+            <param name="args">参数</param>
+        </member>
+        <member name="M:ExtensionMethonds.Log(System.Object,LogUtils.LogCoLor,System.Object)">
+            <summary>
+            打印带有颜色的日志
+            </summary>
+            <param name="obj">拓展的类型</param>
+            <param name="logCoLorEnum">颜色</param>
+            <param name="Log">字符串</param>
+        </member>
+        <member name="M:ExtensionMethonds.Trace(System.Object,System.String,System.Object[])">
+            <summary>
+            打印堆栈
+            </summary>
+            <param name="obj">拓展的类型</param>
+            <param name="Log">字符串</param>
+            <param name="args">参数</param>
+        </member>
+        <member name="M:ExtensionMethonds.Trace(System.Object,System.Object)">
+            <summary>
+            打印堆栈
+            </summary>
+            <param name="obj">拓展的类型</param>
+            <param name="Log">字符串</param>
+        </member>
+        <member name="M:ExtensionMethonds.Warn(System.Object,System.String,System.Object[])">
+            <summary>
+            打印警告日志
+            </summary>
+            <param name="obj">拓展的类型</param>
+            <param name="Log">字符串</param>
+            <param name="args">参数</param>
+        </member>
+        <member name="M:ExtensionMethonds.Warn(System.Object,System.Object)">
+            <summary>
+            打印警告日志
+            </summary>
+            <param name="obj">拓展的类型</param>
+            <param name="Log">字符串</param>
+        </member>
+        <member name="M:ExtensionMethonds.Error(System.Object,System.String,System.Object[])">
+            <summary>
+            打印错误日志
+            </summary>
+            <param name="obj">拓展的类型</param>
+            <param name="Log">字符串</param>
+            <param name="args">参数</param>
+        </member>
+        <member name="M:ExtensionMethonds.Error(System.Object,System.Object)">
+            <summary>
+            打印错误日志
+            </summary>
+            <param name="obj">拓展的类型</param>
+            <param name="Log">字符串</param>
+        </member>
+    </members>
+</doc>

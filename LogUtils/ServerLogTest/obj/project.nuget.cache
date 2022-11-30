@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "vks30Wbp8lD3Y5loGtrVYivbsb08bB/ilOnyvGuNYqNstCbn6Kkco2BdCJYhIhweJe5gh0GsCd8qBM5HfayXxw==",
+  "success": true,
+  "projectFilePath": "D:\\UnityPaoject\\Import\\回合制游戏\\LogUtils\\ServerLogTest\\ServerLogTest.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\3.1.22\\microsoft.netcore.app.host.win-x64.3.1.22.nupkg.sha512"
+  ],
+  "logs": []
+}

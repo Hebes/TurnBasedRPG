@@ -1,0 +1,17 @@
+D:\CSharpProject\LogUtils\ServerLogTest\bin\Debug\netcoreapp3.1\ServerLogTest.exe
+D:\CSharpProject\LogUtils\ServerLogTest\bin\Debug\netcoreapp3.1\ServerLogTest.deps.json
+D:\CSharpProject\LogUtils\ServerLogTest\bin\Debug\netcoreapp3.1\ServerLogTest.runtimeconfig.json
+D:\CSharpProject\LogUtils\ServerLogTest\bin\Debug\netcoreapp3.1\ServerLogTest.runtimeconfig.dev.json
+D:\CSharpProject\LogUtils\ServerLogTest\bin\Debug\netcoreapp3.1\ServerLogTest.dll
+D:\CSharpProject\LogUtils\ServerLogTest\bin\Debug\netcoreapp3.1\ServerLogTest.pdb
+D:\CSharpProject\LogUtils\ServerLogTest\bin\Debug\netcoreapp3.1\LogUtils.dll
+D:\CSharpProject\LogUtils\ServerLogTest\bin\Debug\netcoreapp3.1\LogUtils.pdb
+D:\CSharpProject\LogUtils\ServerLogTest\obj\Debug\netcoreapp3.1\ServerLogTest.csproj.AssemblyReference.cache
+D:\CSharpProject\LogUtils\ServerLogTest\obj\Debug\netcoreapp3.1\ServerLogTest.GeneratedMSBuildEditorConfig.editorconfig
+D:\CSharpProject\LogUtils\ServerLogTest\obj\Debug\netcoreapp3.1\ServerLogTest.AssemblyInfoInputs.cache
+D:\CSharpProject\LogUtils\ServerLogTest\obj\Debug\netcoreapp3.1\ServerLogTest.AssemblyInfo.cs
+D:\CSharpProject\LogUtils\ServerLogTest\obj\Debug\netcoreapp3.1\ServerLogTest.csproj.CoreCompileInputs.cache
+D:\CSharpProject\LogUtils\ServerLogTest\obj\Debug\netcoreapp3.1\ServerLogTest.csproj.CopyComplete
+D:\CSharpProject\LogUtils\ServerLogTest\obj\Debug\netcoreapp3.1\ServerLogTest.dll
+D:\CSharpProject\LogUtils\ServerLogTest\obj\Debug\netcoreapp3.1\ServerLogTest.pdb
+D:\CSharpProject\LogUtils\ServerLogTest\obj\Debug\netcoreapp3.1\ServerLogTest.genruntimeconfig.cache
