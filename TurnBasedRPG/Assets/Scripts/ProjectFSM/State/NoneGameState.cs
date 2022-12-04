@@ -1,5 +1,5 @@
-using UnityEngine;
 using LogUtils;
+using UnityEngine;
 internal class NoneGameState : FSMState
 {
     public NoneGameState(FSMSystem fSMSystem) : base(fSMSystem)
@@ -8,15 +8,6 @@ internal class NoneGameState : FSMState
 
     public override void DoEnter(object obj)
     {
-        PELog.InitSettings();
-        //PELog.Log();
-    }
-
-    public override void DoLeave(object obj)
-    {
-    }
-
-    public override void DOUpdata()
-    {
+        fSMSystem.ChangeGameState(GameState.InitModule, this);
     }
 }

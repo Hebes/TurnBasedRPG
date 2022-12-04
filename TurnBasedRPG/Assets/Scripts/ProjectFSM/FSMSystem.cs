@@ -26,9 +26,9 @@ public class FSMSystem
             Debug.LogError("在状态机里面不存在状态" + gameState + ",无法进行状态转换");
             return;
         }
+        currentState?.DoLeave(obj);
         currentState = stateDic[gameState];
         this.gameState = currentState.StateID;
-        currentState.DoLeave(obj);
-        currentState.DoEnter(obj);
+        currentState?.DoEnter(obj);
     }
 }

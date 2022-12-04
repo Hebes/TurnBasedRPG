@@ -1,3 +1,4 @@
+using LogUtils;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,20 +11,12 @@ public class LoadDataState : FSMState
 
     public override void DoEnter(object obj)
     {
-        Debug.Log("进入LoadDataState");
-    }
-
-    public override void DoLeave(object obj)
-    {
-        Debug.Log("离开LoadDataState");
-    }
-
-    public override void DOUpdata()
-    {
-        Debug.Log("循环LoadDataState");
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            fSMSystem.ChangeGameState(GameState.EnterGame,this);
-        }
+        GameRoot.Instance.audioMgr = AudioMgr.Instance;
+        GameRoot.Instance.prefabMgr = PrefabMgr.Instance;
+        GameRoot.Instance.dataMgr = DataMgr.Instance;
+        
+        PELog.Log("初始化资源完毕");
+        //转换模块
+        fSMSystem.ChangeGameState(GameState.EnterGame, this);
     }
 }

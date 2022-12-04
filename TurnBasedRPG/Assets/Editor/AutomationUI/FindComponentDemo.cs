@@ -210,10 +210,10 @@ public class FindComponentDemo : Editor
     /// 打印里面输出Config
     /// </summary>
     /// <param name="obj"></param>
-    public static void DebugOutGetComponentDemo(string beginStr, Dictionary<string, List<Component>> controlDic)
+    public static void DebugOutGetComponentDemo(string beginStr, Dictionary<string, List<Component>> controlDic, bool isAddPrefix)
     {
         //添加前缀
-        beginStr = AddPrefix(beginStr);
+        beginStr = isAddPrefix ? AddPrefix(beginStr) : string.Empty;
         //字典重新排列 重新排列
         Dictionary<string, List<string>> controlDicTemp = ReArrangeDic(controlDic);
         //打印

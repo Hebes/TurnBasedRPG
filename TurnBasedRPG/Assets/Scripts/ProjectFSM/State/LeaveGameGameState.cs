@@ -1,3 +1,6 @@
+using UnityEngine;
+using LogUtils;
+
 internal class LeaveGameGameState : FSMState
 {
     public LeaveGameGameState(FSMSystem fSMSystem) : base(fSMSystem)
@@ -6,16 +9,12 @@ internal class LeaveGameGameState : FSMState
 
     public override void DoEnter(object obj)
     {
-        throw new System.NotImplementedException();
-    }
-
-    public override void DoLeave(object obj)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public override void DOUpdata()
-    {
-        throw new System.NotImplementedException();
+        //离开游戏
+#if UNITY_EDITOR//在编辑器模式退出
+        UnityEditor.EditorApplication.isPlaying = false;
+#else//发布后退出
+        Application.Quit();
+#endif
+        PELog.Log("关闭游戏");
     }
 }

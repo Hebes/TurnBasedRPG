@@ -35,24 +35,22 @@ public enum GameState
 
 public abstract class FSMState
 {
-    protected GameState uiState;
-    public GameState StateID { get { return uiState; } }
-    protected FSMSystem fSMSystem;
+    public GameState StateID { get; set; }
+    protected FSMSystem fSMSystem { get; set; }
 
     public FSMState(FSMSystem fSMSystem) => this.fSMSystem = fSMSystem;
-
 
     /// <summary>
     /// 进入新状态之前做的事
     /// </summary>
-    public abstract void DoEnter(object obj);
+    public virtual void DoEnter(object obj) { }
     /// <summary>
     /// 离开当前状态时做的事
     /// </summary>
-    public abstract void DoLeave(object obj);
+    public virtual void DoLeave(object obj) { }
     /// <summary>
     /// 每帧要做的事
     /// </summary>
-    public abstract void DOUpdata();
+    public virtual void DOUpdata() { }
 }
 

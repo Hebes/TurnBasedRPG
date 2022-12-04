@@ -9,6 +9,7 @@ public class UIAutomationTool : EditorWindow
     private string prefix = "V_";
 
     public string InputComponentName { get; private set; }
+    private bool isAddPrefix;
 
     [MenuItem("GameObject/组件查找和重命名(Shift+A) #A", false, 0)]
     [MenuItem("Assets/组件查找和重命名(Shift+A) #A")]
@@ -42,7 +43,8 @@ public class UIAutomationTool : EditorWindow
             GUILayout.BeginVertical("box");
             {
                 EditorGUILayout.LabelField("组件查找代码", EditorStyles.label);
-                if (GUILayout.Button("组件查找代码", GUILayout.Width(200))) { ComponentFind(); }
+                isAddPrefix = EditorGUILayout.Toggle("是否添加前缀", isAddPrefix);
+                if (GUILayout.Button("组件查找代码", GUILayout.Width(200))) { ComponentFind(isAddPrefix); }
             }
             GUILayout.EndVertical(); GUILayout.Space(5f);
             //******************************按钮监听代码******************************
@@ -106,12 +108,12 @@ public class UIAutomationTool : EditorWindow
     /// <summary>
     /// 打印组件查找代码
     /// </summary>
-    private void ComponentFind()
+    private void ComponentFind(bool isAddPrefix)
     {
         //获取到当前选择的物体
         GameObject obj = Selection.objects.First() as GameObject;
         Dictionary<string, List<Component>> ComponentsDic = FindComponentDemo.FindComponents(obj);
-        FindComponentDemo.DebugOutGetComponentDemo(InputComponentName, ComponentsDic);//getComponent.
+        FindComponentDemo.DebugOutGetComponentDemo(InputComponentName, ComponentsDic, isAddPrefix);
     }
 
     /// <summary>

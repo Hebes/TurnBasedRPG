@@ -1,25 +1,24 @@
+using LogUtils;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnterGameState : FSMState
 {
+    private GameRoot gameRoot { get; set; }
+
     public EnterGameState(FSMSystem fSMSystem) : base(fSMSystem)
     {
+        gameRoot = GameRoot.Instance;
     }
 
     public override void DoEnter(object obj)
     {
-        Debug.Log("进入EnterGameState");
-    }
+        gameRoot.scenesModule.LoadSceneAsyn(Config.MainScenes, () =>
+         {
+             //gameRoot.prefabMgr.GetPrefab<StartPanel>(PrefabConfig.StartPanel,);
 
-    public override void DoLeave(object obj)
-    {
-        Debug.Log("离开LoadDataState");
-    }
-
-    public override void DOUpdata()
-    {
-        Debug.Log("循环LoadDataState");
+             gameRoot.uiModule.ShowPanel<StartPanel>(PrefabConfig.StartPanel, E_UI_Layer.Bottom);
+         });
     }
 }

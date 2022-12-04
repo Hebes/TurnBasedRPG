@@ -2,31 +2,41 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameRoot : SingletonMono<GameRoot>
+public class GameRoot : SingletonAutoMono<GameRoot>
 {
-    public GameObject Canvas { get; private set; }
-    private FSMSystem FSMSystem { get; set; }
+    public GameObject Canvas { get; set; }
 
-    public GameObject gameObject;
+    public EventModule eventModule { get; set; }
+    public MonoModule monoModule { get; set; }
+    public PoolModule poolModule { get; set; }
+    public ResModule resModule { get; set; }
+    public ScenesModule scenesModule { get; set; }
+    public UIModule uiModule { get; set; }
+
+    public AudioMgr audioMgr { get; internal set; }
+    public DataMgr dataMgr { get; internal set; }
+    public PrefabMgr prefabMgr { get; internal set; }
+
+    public FSMSystem FSMSystem { get; set; }
 
     protected override void Awake()
     {
         base.Awake();
-        DontDestroyOnLoad(this);
         FSMSystem = new FSMSystem();
         FSMSystem.stateDic = new Dictionary<GameState, FSMState>()
         {
-            //{GameState.LoadData,new InitModuleGameState(FSMSystem) },
-            //{GameState.LoadData,new NoneGameState(FSMSystem) },
+            {GameState.None,new NoneGameState(FSMSystem) },
+            {GameState.InitModule,new InitModuleGameState(FSMSystem) },
             {GameState.LoadData,new LoadDataState(FSMSystem) },
             {GameState.EnterGame,new EnterGameState(FSMSystem) },
-            //{GameState.EnterGame,new GameOverGameState(FSMSystem) },
-            //{GameState.EnterGame,new LeaveGameGameState(FSMSystem) },
+            {GameState.GameOver,new GameOverGameState(FSMSystem) },
+            {GameState.LeaveGame,new LeaveGameGameState(FSMSystem) },
         };
-        FSMSystem.ChangeGameState(GameState.LoadData, this);
+        FSMSystem.ChangeGameState(GameState.None, this);
 
-        //Canvas = GameObject.Find("Canvas");
-        //DontDestroyOnLoad(Canvas);
+        DontDestroyOnLoad(this);
+        Canvas = GameObject.Find("Canvas");
+        DontDestroyOnLoad(Canvas);
     }
     private void Update()
     {
