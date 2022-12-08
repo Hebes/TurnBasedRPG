@@ -17,7 +17,7 @@ public class PrefabMgr : BaseManager<PrefabMgr>
     public PrefabMgr()
     {
         prefabs = new List<Transform>();
-        PELog.Log("初始化加载物体");
+        DLog.Log("初始化加载物体");
         LoadPrefab("Prefabs");
     }
 
@@ -63,7 +63,7 @@ public class PrefabMgr : BaseManager<PrefabMgr>
         Transform prefab = prefabs.Find((obj) => { return obj.name.Equals(name); });
         if (prefab != null)
             return prefab.GetComponent<T>() == null ? prefab.gameObject.AddComponent<T>() : prefab.GetComponent<T>();
-        PELog.Log("没有该物体");
+        DLog.Log("没有该物体");
         return null;
     }
 
@@ -82,7 +82,7 @@ public class PrefabMgr : BaseManager<PrefabMgr>
             Transform obj = GameObject.Instantiate(prefab, parent);
             return obj.GetComponent<T>() == null ? obj.gameObject.AddComponent<T>() : obj.GetComponent<T>();
         }
-        PELog.Log("没有该物体");
+        DLog.Log("没有该物体");
         return null;
     }
 

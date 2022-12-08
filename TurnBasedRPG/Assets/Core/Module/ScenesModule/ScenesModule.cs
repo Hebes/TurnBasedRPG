@@ -55,6 +55,6 @@ public class ScenesModule : SingletonAutoMono<ScenesModule>
             yield return ao;
         }
         //加载完成过后 才会去执行fun
-        callback.Invoke();
+        callback?.Invoke();
     }
 }

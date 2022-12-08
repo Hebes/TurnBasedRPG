@@ -9,6 +9,6 @@ public class DataMgr : BaseManager<DataMgr>
 {
     public DataMgr()
     {
-        PELog.Log("初始化数据资源");
+        DLog.Log("初始化数据资源");
     }
 }

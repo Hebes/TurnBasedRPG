@@ -15,6 +15,6 @@ internal class LeaveGameGameState : FSMState
 #else//发布后退出
         Application.Quit();
 #endif
-        PELog.Log("关闭游戏");
+        DLog.Log("关闭游戏");
     }
 }

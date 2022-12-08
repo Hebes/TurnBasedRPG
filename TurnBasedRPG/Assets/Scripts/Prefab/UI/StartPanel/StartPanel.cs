@@ -29,6 +29,12 @@ public class StartPanel : BasePanel
     /// </summary>
     internal void V_startGameAddListener()
     {
+        //TODO 在战斗的时候才去加载BattlePanel面板
+        gameRoot.scenesModule.LoadSceneAsyn(ScenesConfig.BattleScene, () =>
+        {
+            gameRoot.uiModule.ShowPanel<BattlePanel>(ConfigUIPrefab.BattlePanel, E_UI_Layer.Bottom);
+            BasePanelExpand.HidePanel(this);
+        });
     }
 
     /// <summary>
@@ -36,7 +42,7 @@ public class StartPanel : BasePanel
     /// </summary>
     internal void V_settingAddListener()
     {
-        gameRoot.uiModule.ShowPanel<SettingPanel>(PrefabConfig.SettingPanel, E_UI_Layer.Bottom);
+        gameRoot.uiModule.ShowPanel<SettingPanel>(ConfigUIPrefab.SettingPanel, E_UI_Layer.Bottom);
     }
 
     /// <summary>

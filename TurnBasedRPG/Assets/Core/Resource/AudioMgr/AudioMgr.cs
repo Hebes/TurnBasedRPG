@@ -21,7 +21,7 @@ public class AudioMgr : BaseManager<AudioMgr>
     public AudioMgr()
     {
         MonoModule.GetInstance().AddUpdateListener(Update);
-        PELog.Log("初始化音频资源");
+        DLog.Log("初始化音频资源");
     }
 
     private void Update()

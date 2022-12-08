@@ -14,11 +14,9 @@ public class EnterGameState : FSMState
 
     public override void DoEnter(object obj)
     {
-        gameRoot.scenesModule.LoadSceneAsyn(Config.MainScenes, () =>
+        gameRoot.scenesModule.LoadSceneAsyn(ScenesConfig.MainScenes, () =>
          {
-             //gameRoot.prefabMgr.GetPrefab<StartPanel>(PrefabConfig.StartPanel,);
-
-             gameRoot.uiModule.ShowPanel<StartPanel>(PrefabConfig.StartPanel, E_UI_Layer.Bottom);
+             gameRoot.uiModule.ShowPanel<StartPanel>(ConfigUIPrefab.StartPanel, E_UI_Layer.Bottom);
          });
     }
 }

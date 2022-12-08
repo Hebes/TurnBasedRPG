@@ -1,0 +1,35 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+/// <summary>
+/// ª˘¥°”¢–€ Ù–‘
+/// </summary>
+[Serializable]
+public class BaseHero :BaseCharacterClasses
+{
+    /// <summary>
+    /// ƒÕ¡¶
+    /// </summary>
+    [Tooltip("ƒÕ¡¶")]
+    public int stamina;
+
+    /// <summary>
+    /// ÷«¡¶
+    /// </summary>
+    [Tooltip("÷«¡¶")]
+    public int intellect;
+
+    /// <summary>
+    /// ¡È«…
+    /// </summary>
+    [Tooltip("¡È«…")]
+    public int dexterity;
+
+    /// <summary>
+    /// √ÙΩ›
+    /// </summary>
+    [Tooltip("√ÙΩ›")]
+    public int agility;
+}

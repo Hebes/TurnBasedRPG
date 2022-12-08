@@ -10,11 +10,13 @@ internal class InitModuleGameState : FSMState
 
     public override void DoEnter(object obj)
     {
+        bool isLogPrint= PlayerPrefs.GetInt("设置日志开启") == 0;
+        
         //Debug模块
         //主动日志模块
-        PELog.InitSettings(new LogConfig()
+        DLog.InitSettings(new LogConfig()
         {
-            enableSave=false,
+            enableSave= isLogPrint,
             eLoggerType = LoggerType.Unity,
 #if !UNITY_EDITOR
             savePath = $"{Application.persistentDataPath}/LogOut/ActiveLog/",
@@ -37,7 +39,7 @@ internal class InitModuleGameState : FSMState
         //UI管理模块
         GameRoot.Instance.uiModule = UIModule.Instance;
 
-        PELog.Log("初始化模块完毕");
+        DLog.Log("初始化模块完毕");
         //切换模块
         fSMSystem.ChangeGameState(GameState.LoadData, this);
     }

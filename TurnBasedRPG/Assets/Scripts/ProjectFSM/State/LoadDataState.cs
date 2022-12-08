@@ -15,7 +15,7 @@ public class LoadDataState : FSMState
         GameRoot.Instance.prefabMgr = PrefabMgr.Instance;
         GameRoot.Instance.dataMgr = DataMgr.Instance;
         
-        PELog.Log("初始化资源完毕");
+        DLog.Log("初始化资源完毕");
         //转换模块
         fSMSystem.ChangeGameState(GameState.EnterGame, this);
     }

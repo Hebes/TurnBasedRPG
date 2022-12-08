@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 84574567702145239}
   - component: {fileID: 84574567702145237}
   - component: {fileID: 84574567702145238}
-  - component: {fileID: 8086249690004884922}
   m_Layer: 5
   m_Name: StartPanel
   m_TagString: Untagged
@@ -82,18 +81,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &8086249690004884922
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 84574567702145240}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31fc212188f9b214aad6338d6e0dc11e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &84574567972065309
 GameObject:
   m_ObjectHideFlags: 0

@@ -36,7 +36,7 @@ public class SettingPanel : BasePanel
 	/// </summary>
     internal void V_closeAddListener()
     {
-		GameRoot.Instance.uiModule.HidePanel(PrefabConfig.SettingPanel);
+		GameRoot.Instance.uiModule.HidePanel(ConfigUIPrefab.SettingPanel);
 	}
 
 	/// <summary>
@@ -45,7 +45,7 @@ public class SettingPanel : BasePanel
     public override void HidePanel()
     {
         base.HidePanel();
-		PELog.Log("关闭了SettingPanel面板");
+		DLog.Log("关闭了SettingPanel面板");
     }
 }
 

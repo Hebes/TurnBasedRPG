@@ -89,6 +89,7 @@ public class UIModule : BaseManager<UIModule>
                     break;
             }
             //设置父对象  设置相对位置和大小
+            obj.name = panelName;
             obj.transform.SetParent(father);
             obj.transform.localPosition = Vector3.zero;
             obj.transform.localScale = Vector3.one;
