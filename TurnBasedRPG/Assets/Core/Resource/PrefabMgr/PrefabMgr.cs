@@ -5,11 +5,11 @@ using LogUtils;
 using System.Linq;
 
 /// <summary>
-/// ÎïÌå¹ÜÀíÄ£¿é
+/// ç‰©ä½“ç®¡ç†æ¨¡å—
 /// </summary>
 public class PrefabMgr : BaseManager<PrefabMgr>
 {
-    //TODO ±àĞ´²»Í¬³¡¾°¼ÓÔØ²»Í¬ÎïÌå
+    //TODO ç¼–å†™ä¸åŒåœºæ™¯åŠ è½½ä¸åŒç‰©ä½“
     //public string path { get; } = "";
 
     private List<Transform> prefabs { get; set; }
@@ -17,12 +17,11 @@ public class PrefabMgr : BaseManager<PrefabMgr>
     public PrefabMgr()
     {
         prefabs = new List<Transform>();
-        DLog.Log("³õÊ¼»¯¼ÓÔØÎïÌå");
         LoadPrefab("Prefabs");
     }
 
     /// <summary>
-    /// ¼ÓÔØÎïÌå,ÇĞ»»³¡¾°Ê±Í¬¹¹Õâ¸ö·½·¨µ÷ÓÃÕâ¸ö·½·¨¼ÓÔØ²»Í¬³¡¾°µÄÎïÌå
+    /// åŠ è½½ç‰©ä½“,åˆ‡æ¢åœºæ™¯æ—¶åŒæ„è¿™ä¸ªæ–¹æ³•è°ƒç”¨è¿™ä¸ªæ–¹æ³•åŠ è½½ä¸åŒåœºæ™¯çš„ç‰©ä½“
     /// </summary>
     //private void LoadUI()
     //{
@@ -32,7 +31,7 @@ public class PrefabMgr : BaseManager<PrefabMgr>
     //}
 
     /// <summary>
-    /// ¼ÓÔØÍ¨ÓÃÎïÌå
+    /// åŠ è½½é€šç”¨ç‰©ä½“
     /// </summary>
     private void LoadPrefab(string path)
     {
@@ -41,19 +40,19 @@ public class PrefabMgr : BaseManager<PrefabMgr>
     }
 
     /// <summary>
-    /// »ñÈ¡prefab
+    /// è·å–prefab
     /// </summary>
     //public T GetUI<T>(string name, Transform parent = null) where T : Component
     //{
     //    Transform prefab = prefabs.Find((obj) => { return obj.name.Equals(name); });
     //    if (prefab != null)
     //        return prefab.GetComponent<T>() == null ? prefab.gameObject.AddComponent<T>() : prefab.GetComponent<T>();
-    //    PELog.Log("Ã»ÓĞ¸ÃÎïÌå");
+    //    PELog.Log("æ²¡æœ‰è¯¥ç‰©ä½“");
     //    return null;
     //}
 
     /// <summary>
-    /// »ñÈ¡prefab£¨Î´ÊµÀı»¯£©
+    /// è·å–prefabï¼ˆæœªå®ä¾‹åŒ–ï¼‰
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="name"></param>
@@ -63,12 +62,12 @@ public class PrefabMgr : BaseManager<PrefabMgr>
         Transform prefab = prefabs.Find((obj) => { return obj.name.Equals(name); });
         if (prefab != null)
             return prefab.GetComponent<T>() == null ? prefab.gameObject.AddComponent<T>() : prefab.GetComponent<T>();
-        DLog.Log("Ã»ÓĞ¸ÃÎïÌå");
+        DLog.Log("æ²¡æœ‰è¯¥ç‰©ä½“");
         return null;
     }
 
     /// <summary>
-    /// »ñÈ¡prefab£¨ÊµÀı»¯£©
+    /// è·å–prefabï¼ˆå®ä¾‹åŒ–ï¼‰
     /// </summary>
     /// <typeparam name="T"></typeparam>
     /// <param name="name"></param>
@@ -82,12 +81,12 @@ public class PrefabMgr : BaseManager<PrefabMgr>
             Transform obj = GameObject.Instantiate(prefab, parent);
             return obj.GetComponent<T>() == null ? obj.gameObject.AddComponent<T>() : obj.GetComponent<T>();
         }
-        DLog.Log("Ã»ÓĞ¸ÃÎïÌå");
+        DLog.Log("æ²¡æœ‰è¯¥ç‰©ä½“");
         return null;
     }
 
     /// <summary>
-    /// ÖØĞÂ¼ÓÔØÎïÌå£¨ÇĞ»»³¡¾°Ê±Ê¹ÓÃ£©ÈçÓĞ±ØÒª
+    /// é‡æ–°åŠ è½½ç‰©ä½“ï¼ˆåˆ‡æ¢åœºæ™¯æ—¶ä½¿ç”¨ï¼‰å¦‚æœ‰å¿…è¦
     /// </summary>
     /// <param name="path"></param>
     public void ReloadPrefab(string path)

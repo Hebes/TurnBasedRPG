@@ -1,0 +1,14 @@
+﻿"注释:
+表格生成前请去除空行操作步骤为:开始->查找->定位->选择空值->确定",,,,,,
+生成的类名和文件名:,Charect,,,,,
+序号,名称,技能,伤害,攻击力,是否完成,图片
+int,string,List<int>,float,float,bool,Sprite
+ID,Name,Skill,Damage,Attack,OK,Sprite
+1,测试1,1|2|3,4,1.1,ture,ic_create_add_01
+2,测试2,1|2|4,5,2.1,FALSE,ic_create_add_01
+3,测试3,1|2|5,6,3.1,FALSE,ic_create_add_01
+4,测试4,1|2|6,7,4.1,ture,ic_create_add_01
+5,测试5,1|2|7,8,5.1,ture,ic_create_add_01
+6,测试6,1|2|8,9,6.1,FALSE,ic_create_add_01
+7,测试7,1|2|9,10,7.1,FALSE,ic_create_add_01
+8,测试8,1|2|10,11,8.1,FALSE,ic_create_add_01

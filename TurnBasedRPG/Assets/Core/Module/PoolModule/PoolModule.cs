@@ -18,7 +18,7 @@ public class PoolData
         //给我们的抽屉 创建一个父对象 并且把他作为我们pool(衣柜)对象的子物体
         fatherObj = new GameObject(obj.name);
         //fatherObj.transform.parent = poolObj.transform;
-        fatherObj.transform.SetParent(poolObj.transform);
+        fatherObj.transform.SetParent(poolObj.transform, false);
         poolList = new List<GameObject>() { };
         PushObj(obj);
     }
@@ -35,7 +35,7 @@ public class PoolData
         poolList.Add(obj);
         //设置父对象
         //obj.transform.parent = fatherObj.transform;
-        obj.transform.SetParent(fatherObj.transform);
+        obj.transform.SetParent(fatherObj.transform, false);
     }
 
     /// <summary>
@@ -106,9 +106,11 @@ public class PoolModule : SingletonAutoMono<PoolModule>
     public void PushObj(string name, GameObject obj)
     {
         if (poolObj == null)
+        {
             poolObj = new GameObject("Pool");
+            DontDestroyOnLoad(poolObj);
+        }
 
-        
         if (poolDic.ContainsKey(name))//里面有抽屉
             poolDic[name].PushObj(obj);
         else//里面没有抽屉
@@ -121,6 +123,8 @@ public class PoolModule : SingletonAutoMono<PoolModule>
     /// </summary>
     public void Clear()
     {
+        foreach (var Key in poolDic.Keys)
+            poolDic[Key].poolList.ForEach((go) => { GameObject.Destroy(go); });
         poolDic.Clear();
         poolObj = null;
     }

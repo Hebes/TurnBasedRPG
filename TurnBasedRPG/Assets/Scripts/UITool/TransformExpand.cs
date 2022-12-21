@@ -137,6 +137,17 @@ public static class TransformExpand
     }
 
     /// <summary>
+    /// 获取SpriteRenderer组件
+    /// </summary>
+    /// <param name="transform"></param>
+    /// <param name="name">需要获取的组件名字</param>
+    /// <returns></returns>
+    public static SpriteRenderer OnGetSpriteRenderer(this Transform transform, string name)
+    {
+        return transform.OnFindAnyComponent<SpriteRenderer>(name);
+    }
+
+    /// <summary>
     /// 获取Dropdown组件
     /// </summary>
     /// <param name="transform"></param>

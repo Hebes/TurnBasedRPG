@@ -21,9 +21,18 @@ public class MonoModule : SingletonAutoMono<MonoModule>
         base.Awake();
         awakeEvent?.Invoke();
     }
-    private void Start() => startEvent?.Invoke();
-    private void Update() => updateEvent?.Invoke();
-    private void FixedUpdate() => fixUpdateEvent?.Invoke();
+    private void Start()
+    {
+        startEvent?.Invoke();
+    }
+    private void Update()
+    {
+        updateEvent?.Invoke();
+    }
+    private void FixedUpdate()
+    {
+        fixUpdateEvent?.Invoke();
+    }
 
     //*********************************添加事件监听*********************************
     /// <summary>

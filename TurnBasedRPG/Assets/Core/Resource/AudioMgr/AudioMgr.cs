@@ -20,21 +20,21 @@ public class AudioMgr : BaseManager<AudioMgr>
 
     public AudioMgr()
     {
-        MonoModule.GetInstance().AddUpdateListener(Update);
-        DLog.Log("初始化音频资源");
+        //MonoModule.GetInstance().AddUpdateListener(Update);
+        //DLog.Log("初始化音频资源");
     }
 
-    private void Update()
-    {
-        for (int i = soundList.Count - 1; i >= 0; --i)
-        {
-            if (!soundList[i].isPlaying)
-            {
-                GameObject.Destroy(soundList[i]);
-                soundList.RemoveAt(i);
-            }
-        }
-    }
+    //private void Update()
+    //{
+    //    for (int i = soundList.Count - 1; i >= 0; --i)
+    //    {
+    //        if (!soundList[i].isPlaying)
+    //        {
+    //            GameObject.Destroy(soundList[i]);
+    //            soundList.RemoveAt(i);
+    //        }
+    //    }
+    //}
 
     /// <summary>
     /// 播放背景音乐

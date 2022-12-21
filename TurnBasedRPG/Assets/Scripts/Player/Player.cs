@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
 {
     [Header("移动相关")]
     private Rigidbody2D rb;
-    public float speed = 10f;
+    public float moveSpeed = 10f;
     private float inputX;
     private float inputY;
     private Vector2 movementInput;
@@ -37,9 +37,13 @@ public class Player : MonoBehaviour
     /// </summary>
     private bool InputDisable;
 
+    public Vector3 curPos, LastPos;
+
+
+
     private void OnEnable()
     {
-      
+
 
     }
     private void OnDisable()
@@ -50,8 +54,25 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animators = GetComponentsInChildren<Animator>();
     }
+
+    //private void Start()
+    //{
+    //    if (GameManager.instance.nextSpawnPoint != "")
+    //    {
+    //        GameObject spawnPoint = GameObject.Find(GameManager.instance.nextSpawnPoint);
+    //        transform.position = spawnPoint.transform.position;
+    //        GameManager.instance.nextSpawnPoint = "";
+    //    }
+    //    else if (GameManager.instance.lastHeroPosition != Vector3.zero)
+    //    {
+    //        transform.position = GameManager.instance.lastHeroPosition;
+    //        GameManager.instance.lastHeroPosition = Vector3.zero;
+    //    }
+    //}
+
     void Update()
     {
+        LastPos = curPos;
         if (!InputDisable)
             PlayerInput();
         else
@@ -62,6 +83,19 @@ public class Player : MonoBehaviour
     {
         if (!InputDisable)
             Movement();
+        curPos = transform.position;
+        SceneMG.Instance.isWalking = curPos == LastPos ? false : true;
+        LastPos = curPos;
+
+        //float moveX = Input.GetAxis("Horizontal");
+        //float moveZ = Input.GetAxis("Vertical");
+        //Vector3 movement = new Vector3(moveX, 0.0f, moveZ);
+        //GetComponent<Rigidbody2D>().velocity = movement * moveSpeed * Time.fixedDeltaTime;
+
+        //curPos = transform.position;
+        //GameRoot.Instance.sceneManager.isWalking = isMoving = curPos == LastPos ? false : true;
+        //LastPos = curPos;
+        //SwitchAnimation();
     }
 
 
@@ -89,7 +123,7 @@ public class Player : MonoBehaviour
         isMoving = movementInput != Vector2.zero;//判断是否在移动
     }
     /// <summary>角色移动</summary>
-    private void Movement() => rb.MovePosition(rb.position + (speed * Time.fixedDeltaTime * movementInput));
+    private void Movement() => rb.MovePosition(rb.position + (moveSpeed * Time.fixedDeltaTime * movementInput));
     /// <summary>播放所有的动画</summary>
     private void SwitchAnimation()
     {
@@ -103,6 +137,47 @@ public class Player : MonoBehaviour
             }
         }
     }
+
+
+    //void OnTriggerEnter(Collider other)
+    //{
+    //    //生成点
+    //    if (other.tag == "teleporter")
+    //    {
+    //        CollisionHandler col = other.gameObject.GetComponent<CollisionHandler>();
+    //        GameManager.instance.nextSpawnPoint = col.spawnPointName;   //进入房屋会报错正常  因为没做 ，就做了世界地图和镇子
+    //        GameManager.instance.sceneToLoad = col.sceneToLoad;
+    //        GameManager.instance.LoadNextScene();
+    //    }
+
+    //    if (other.tag == "region1")
+    //        GameManager.instance.curRegions = 0;
+    //    if (other.tag == "region2")
+    //        GameManager.instance.curRegions = 1;
+    //}
+
+    ///// <summary>
+    ///// 打开区域遇怪
+    ///// </summary>
+    ///// <param name="other"></param>
+    //void OnTriggerStay(Collider other)
+    //{
+    //    if (other.tag == "region1" || other.tag == "region2")
+    //    {
+    //        GameManager.instance.canGetEncounter = true;
+    //    }
+    //}
+    ///// <summary>
+    ///// 关闭区域遇怪
+    ///// </summary>
+    ///// <param name="other"></param>
+    //void OnTriggerExit(Collider other)
+    //{
+    //    if (other.tag == "region1" || other.tag == "region2")
+    //    {
+    //        GameManager.instance.canGetEncounter = false;
+    //    }
+    //}
 }
 
 

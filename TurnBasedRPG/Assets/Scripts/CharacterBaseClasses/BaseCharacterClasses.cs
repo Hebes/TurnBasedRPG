@@ -5,68 +5,68 @@ using UnityEngine;
 public class BaseCharacterClasses
 {
     /// <summary>
-    /// Ãû³Æ
+    /// åç§°
     /// </summary>
-    [Tooltip("Ãû³Æ")]
+    [Tooltip("åç§°")]
     public string theName;
 
     /// <summary>
-    /// »ù´¡ÑªÁ¿
+    /// åŸºç¡€è¡€é‡
     /// </summary>
-    [Tooltip("»ù´¡ÑªÁ¿")]
+    [Tooltip("åŸºç¡€è¡€é‡")]
     public float baseHP;
 
     /// <summary>
-    /// µ±Ç°ÑªÁ¿
+    /// å½“å‰è¡€é‡
     /// </summary>
-    [Tooltip("µ±Ç°ÑªÁ¿")]
+    [Tooltip("å½“å‰è¡€é‡")]
     public float curHP;
 
     /// <summary>
-    /// »ù´¡Ä§·¨Öµ
+    /// åŸºç¡€é­”æ³•å€¼
     /// </summary>
-    [Tooltip("»ù´¡Ä§·¨Öµ")]
+    [Tooltip("åŸºç¡€é­”æ³•å€¼")]
     public float BaseMP;
 
     /// <summary>
-    /// µ±Ç°Ä§·¨Öµ
+    /// å½“å‰é­”æ³•å€¼
     /// </summary>
-    [Tooltip("µ±Ç°Ä§·¨Öµ")]
+    [Tooltip("å½“å‰é­”æ³•å€¼")]
     public float curMP;
 
     /// <summary>
-    /// »ù´¡¹¥»÷Á¦
+    /// åŸºç¡€æ”»å‡»åŠ›
     /// </summary>
-    [Tooltip("»ù´¡¹¥»÷Á¦")]
+    [Tooltip("åŸºç¡€æ”»å‡»åŠ›")]
     public float baeATK;
 
     /// <summary>
-    /// µ±Ç°¹¥»÷Á¦
+    /// å½“å‰æ”»å‡»åŠ›
     /// </summary>
-    [Tooltip("µ±Ç°¹¥»÷Á¦")]
+    [Tooltip("å½“å‰æ”»å‡»åŠ›")]
     public float curAtk;
 
     /// <summary>
-    /// »ù´¡·ÀÓùÁ¦
+    /// åŸºç¡€é˜²å¾¡åŠ›
     /// </summary>
-    [Tooltip("»ù´¡·ÀÓùÁ¦")]
+    [Tooltip("åŸºç¡€é˜²å¾¡åŠ›")]
     public float baseDEF;
 
     /// <summary>
-    /// µ±Ç°·ÀÓùÁ¦
+    /// å½“å‰é˜²å¾¡åŠ›
     /// </summary>
-    [Tooltip("µ±Ç°·ÀÓùÁ¦")]
+    [Tooltip("å½“å‰é˜²å¾¡åŠ›")]
     public float curDEF;
 
     /// <summary>
-    /// ¼¼ÄÜ¹¥»÷·½Ê½
+    /// æŠ€èƒ½æ”»å‡»æ–¹å¼
     /// </summary>
-    [Tooltip("¼¼ÄÜ¹¥»÷·½Ê½")]
+    [Tooltip("æŠ€èƒ½æ”»å‡»æ–¹å¼")]
     public List<BaseAttack> attacks = new List<BaseAttack>();
 
     /// <summary>
-    /// Ä§·¨¹¥»÷·½Ê½
+    /// é­”æ³•æ”»å‡»æ–¹å¼
     /// </summary>
-    [Tooltip("Ä§·¨¹¥»÷·½Ê½")]
-    public List<BaseAttack> MagicAttack = new List<BaseAttack>();
+    [Tooltip("é­”æ³•æ”»å‡»æ–¹å¼")]
+    public List<BaseAttack> MagicAttacks = new List<BaseAttack>();
 }

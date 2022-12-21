@@ -5,13 +5,13 @@ using UnityEngine.UI;
 /// <summary>
 /// C# 中普通类、抽象类、接口之间的区别 https://blog.csdn.net/T_Twory/article/details/51543247
 /// </summary>
-public abstract class BaseUIGetComponents_new
+public class BaseUIGetComponents_new
 {
     //通过里式转换原则 来存储所有的控件
     private Dictionary<string, List<Component>> controlDic = null;
     protected GameObject Obj;
 
-    protected BaseUIGetComponents_new(GameObject Obj)
+    public BaseUIGetComponents_new(GameObject Obj)
     {
         this.Obj = Obj;
         controlDic = new Dictionary<string, List<Component>>();
