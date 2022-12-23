@@ -25,7 +25,7 @@ public class FSMSystem
         }
         currentState?.DoLeave(obj);
         currentState = stateDic[gameState];
-        this.gameState = currentState.StateID;
+        this.gameState = gameState;
         currentState?.DoEnter(obj);
     }
 

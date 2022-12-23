@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using LogUtils;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class StartPanel : BasePanel
 {
@@ -75,6 +76,7 @@ public class StartPanel : BasePanel
 
     #endregion
 
+
     //**********************************************逻辑**********************************************
     public GameRoot gameRoot { get; private set; }
 
@@ -84,6 +86,7 @@ public class StartPanel : BasePanel
         OnGetComponent();
         OnAddListener();
         gameRoot = GameRoot.Instance;
+        Effer();
     }
 
     /// <summary>
@@ -102,7 +105,7 @@ public class StartPanel : BasePanel
         gameRoot.uiModule.ShowPanel(new UIInfo<SettingPanel>()
         {
             panelName = ConfigUIPrefab.SettingPanel,
-            layer = E_UI_Layer.Bottom,
+            layer = E_UI_Layer.System,
         });
     }
 
@@ -123,11 +126,17 @@ public class StartPanel : BasePanel
     private void T_loadDataAddListener()
     {
         Debug.Log("加载存档");
-        PanelExpand.ShowTopHint(new HintInfo()
+        PanelExpand.SHowTopHintOfDotween(new HintInfo() 
         {
             title = "系统提示111",
             countent = "你输了",
-        }, (panel) => { Debug.Log("显示了TopHint面板"); });
+        });
+
+        //PanelExpand.ShowTopHint(new HintInfo()
+        //{
+        //    title = "系统提示111",
+        //    countent = "你输了",
+        //}, (panel) => { Debug.Log("显示了TopHint面板"); });
     }
 
     /// <summary>
@@ -154,5 +163,31 @@ public class StartPanel : BasePanel
         //        BasePanelExpand.HidePanel(ConfigUIPrefab.StartPanel);
         //    });
         //});
+    }
+
+    //**********************************************动画效果**********************************************
+
+    /// <summary>
+    /// 动画效果
+    /// </summary>
+    private void Effer()
+    {
+        List<Transform> transforms = new List<Transform>();
+        transforms.Add(T_loadDataTransform);
+        transforms.Add(T_startGameTransform);
+        transforms.Add(T_settingTransform);
+        transforms.Add(T_quitTransform);
+        transforms.Add(T_testBattleTransform);
+        StartCoroutine(ItemAnimation(transforms));
+    }
+
+    IEnumerator ItemAnimation(List<Transform> transforms)
+    {
+        transforms.ForEach((transformTemp => { transformTemp.localScale = Vector3.zero; }));
+        foreach (var item in transforms)
+        {
+            item.transform.DOScale(1f, 1f).SetEase(Ease.Unset);
+            yield return new WaitForSeconds(.2f);
+        }
     }
 }

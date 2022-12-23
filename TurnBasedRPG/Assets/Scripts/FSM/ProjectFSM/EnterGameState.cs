@@ -14,11 +14,8 @@ public class EnterGameState : FSMState
 
     public override void DoEnter(object obj)
     {
-        GameObject.DontDestroyOnLoad(gameRoot);
-        GameObject.DontDestroyOnLoad(gameRoot.Canvas);
-        GameObject.DontDestroyOnLoad(gameRoot.MainCanmera);
+        
         gameRoot.sceneManager = SceneMG.Instance;
-        GameObject.DontDestroyOnLoad(gameRoot.sceneManager);
         gameRoot.sceneManager.SceneManagerInit();
 
         GameRoot.Instance.uiModule.HidePanel(ConfigUIPrefab.LoadPanel);

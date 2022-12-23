@@ -17,17 +17,17 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Ground
+  - Enemy
+  - Player
+  - Damageable
+  - Attackable
+  - Bullet
+  - BulletAttackable
+  - DestructibleItem
+  - Traps
+  - InteractiveObject
+  - Coin
   - 
   - 
   - 
@@ -44,4 +44,16 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 3413494319
+    locked: 0
+  - name: Enemy
+    uniqueID: 253301197
+    locked: 0
+  - name: Player
+    uniqueID: 4008218415
+    locked: 0
+  - name: UI
+    uniqueID: 3988338355
     locked: 0

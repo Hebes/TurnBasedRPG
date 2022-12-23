@@ -63,12 +63,15 @@ public class SceneMG : SingletonAutoMono<SceneMG>
 
 
     public Player player { get; set; }
-    //public GameObject player;
+    [Tooltip("是否用鼠标定位摄像机")] public bool cameraPositionWithMouse;
+
 
     [Tooltip("当前场景的名称")] public string sceneToLoad;//下一个场景的名称
     [Tooltip("最后一个场景的名称")] public string lastScene;//BATTLE 最后一个场景的名称
 
-
+    /// <summary>
+    /// 场景的初始化
+    /// </summary>
     public void SceneManagerInit()
     {
         sceneMgrFSMSystem = new FSMSystem();
@@ -96,4 +99,16 @@ public class SceneMG : SingletonAutoMono<SceneMG>
     /// 加载最后一次场景  战斗完毕后
     /// </summary>
     public void LoadSceneAfterBattle() => GameRoot.Instance.scenesModule.LoadScene(lastScene);
+
+    /// <summary>
+    /// 摄像机移动
+    /// </summary>
+    /// <returns></returns>
+    public Vector3 GetCameraPosition()
+    {
+        if (player == null) return Vector3.zero;
+        return cameraPositionWithMouse ?
+               player.transform.position + ((UtilsClass.GetMouseWorldPosition() - player.transform.position) * .3f) :
+               player.transform.position;
+    }
 }

@@ -30,6 +30,8 @@ public class WorldSceneManager : MonoBehaviour
             Player Hero = Instantiate(player, GameRoot.Instance.sceneManager.lastHeroPosition, Quaternion.identity);
             Hero.name = "HeroCharacter";
             gameRoot.sceneManager.player = Hero;
+
+            gameRoot.MainCanmera.GetComponent<Camera_Follow>().Setup(gameRoot.sceneManager.GetCameraPosition, () => 5f, true, true);//70为摄像机的大小
         }
     }
 }

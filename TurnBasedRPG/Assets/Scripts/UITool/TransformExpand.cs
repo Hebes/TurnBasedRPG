@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public static class TransformExpand
 {
-
+    //*********************************组件查找拓展1*********************************
     /// <summary>
     /// 未知层级,查找后代指定名称的变换组件。
     /// </summary>
@@ -31,40 +31,16 @@ public static class TransformExpand
     }
 
     /// <summary>
-    /// 清空子物体
+    /// 获取组件
     /// </summary>
+    /// <typeparam name="T"></typeparam>
     /// <param name="transform"></param>
-    public static void tfClearChild(this Transform transform)
+    /// <param name="objPath"></param>
+    /// <returns></returns>
+    public static T GetComponentInChildren<T>(this Transform transform, string objPath) where T : Component
     {
-        for (int t = 0; t < transform?.childCount; t++)
-        {
-            GameObject.Destroy(transform.GetChild(t).gameObject);
-        }
-    }
-
-    /// <summary>
-    /// 清空子物体
-    /// </summary>
-    /// <param name="transform"></param>
-    public static void tfClearChild(this Transform transform, List<int> number)
-    {
-        for (int t = 0; t < transform?.childCount; t++)
-        {
-            bool isContinue = false;//是否跳过
-            for (int n = 0; n < number?.Count; n++)
-            {
-                if (t == number[n])
-                {
-                    isContinue = true;
-                    continue;
-                }
-            }
-            if (!isContinue)
-            {
-                GameObject.Destroy(transform.GetChild(t).gameObject);
-            }
-
-        }
+        Transform childTF = transform.Find(objPath);
+        return childTF.GetComponent<T>() == null ? childTF.gameObject.AddComponent<T>() : childTF.GetComponent<T>();
     }
 
     #region 查找组件的拓展
@@ -170,5 +146,36 @@ public static class TransformExpand
     }
     #endregion
 
+    //*********************************组件清空子物体*********************************
+    /// <summary>
+    /// 清空子物体
+    /// </summary>
+    /// <param name="transform"></param>
+    public static void ClearChild(this Transform transform)
+    {
+        for (int t = 0; t < transform?.childCount; t++)
+            GameObject.Destroy(transform.GetChild(t).gameObject);
+    }
+
+    /// <summary>
+    /// 清空子物体
+    /// </summary>
+    /// <param name="transform"></param>
+    /// <param name="number">需要跳过的数字</param>
+    public static void ClearChild(this Transform transform, List<int> number)
+    {
+        for (int t = 0; t < transform?.childCount; t++)
+        {
+            bool isContinue = false;//是否跳过
+            for (int n = 0; n < number?.Count; n++)
+            {
+                if (t == number[n]) { isContinue = true; continue; }
+            }
+            if (!isContinue)
+            {
+                GameObject.Destroy(transform.GetChild(t).gameObject);
+            }
+        }
+    }
 }
 

@@ -242,17 +242,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hero:
-    theName: 
-    baseHP: 0
-    curHP: 0
-    BaseMP: 0
-    curMP: 0
-    baeATK: 0
-    curAtk: 0
+    theName: hero1
+    LV: 100
+    baseHP: 110
+    curHP: 110
+    BaseMP: 10
+    curMP: 10
+    baeATK: 10
+    curAtk: 10
     baseDEF: 0
     curDEF: 0
-    attacks: []
-    MagicAttack: []
+    attacks:
+    - attackName: "hero\u7269\u7406\u653B\u51FB1"
+      attackDescription: "hero\u7269\u7406\u653B\u51FB1"
+      attackDamage: 0
+      attackCost: 0
+    - attackName: "hero\u7269\u7406\u653B\u51FB2"
+      attackDescription: "hero\u7269\u7406\u653B\u51FB2"
+      attackDamage: 0
+      attackCost: 0
+    MagicAttacks:
+    - attackName: "hero\u9B54\u6CD5\u653B\u51FB1"
+      attackDescription: "hero\u9B54\u6CD5\u653B\u51FB1"
+      attackDamage: 0
+      attackCost: 0
+    - attackName: "hero\u9B54\u6CD5\u653B\u51FB2"
+      attackDescription: "hero\u9B54\u6CD5\u653B\u51FB2"
+      attackDamage: 0
+      attackCost: 0
     stamina: 0
     intellect: 0
     dexterity: 0

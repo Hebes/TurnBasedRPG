@@ -55,6 +55,7 @@ public class GameRoot : SingletonAutoMono<GameRoot>
     protected override void Awake()
     {
         base.Awake();
+        DontDestroyOnLoad(gameObject);
         FSMSystem = new FSMSystem();
         FSMSystem.stateDic = new Dictionary<string, FSMState>()
         {
@@ -76,6 +77,7 @@ public class GameRoot : SingletonAutoMono<GameRoot>
         FSMSystem.Update();
     }
 
+    #region 杂项代码
     ///// <summary>
     ///// 从固定场景开始执行
     ///// </summary>
@@ -85,4 +87,6 @@ public class GameRoot : SingletonAutoMono<GameRoot>
     //    if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == ConfigScenes.Init) return;
     //    UnityEngine.SceneManagement.SceneManager.LoadScene(ConfigScenes.Init);
     //}
+    #endregion
+
 }

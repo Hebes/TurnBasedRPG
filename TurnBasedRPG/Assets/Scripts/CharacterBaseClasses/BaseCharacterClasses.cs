@@ -11,6 +11,12 @@ public class BaseCharacterClasses
     public string theName;
 
     /// <summary>
+    /// 等级
+    /// </summary>
+    [Tooltip("等级")]
+    public int LV;
+
+    /// <summary>
     /// 基础血量
     /// </summary>
     [Tooltip("基础血量")]

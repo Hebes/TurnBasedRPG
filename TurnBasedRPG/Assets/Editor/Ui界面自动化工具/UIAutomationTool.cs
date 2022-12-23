@@ -1,21 +1,31 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class UIAutomationTool : EditorWindow
 {
-    private const string UIprefix = "V_";
-    private const string TransformPrefix = "T_";
-
-    private static bool isAddPrefix { get; set; }
     private Vector2 scrollPosition { get; set; } = Vector2.zero;
 
+    private const string UIprefix = "V_";
+    private const string TransformPrefix = "T_";
+    private static bool isAddPrefix { get; set; }
     public string InputComponentName { get; private set; }
     public string InputTransformComponentName { get; private set; }
+    public string TransformGetPrefix { get; private set; }
+
+    /// <summary>是否赋值</summary>
+    public bool isAssign { get; private set; }
+    /// <summary>
+    /// 是否复制到剪切板-tf直接获取的版本
+    /// </summary>
+    public bool isCopyBoard3 { get; private set; }
+    
 
     [MenuItem("GameObject/组件查找和重命名(Shift+A) #A", false, 0)]
     [MenuItem("Assets/组件查找和重命名(Shift+A) #A")]
@@ -24,7 +34,7 @@ public class UIAutomationTool : EditorWindow
 
     private void OnGUI()
     {
-        scrollPosition = GUILayout.BeginScrollView(scrollPosition,true, true);//GUILayout.Width(400), GUILayout.Height(500)
+        scrollPosition = GUILayout.BeginScrollView(scrollPosition, true, true);//GUILayout.Width(400), GUILayout.Height(500)
         {
             EditorGUILayout.BeginHorizontal(GUILayout.Width(position.width), GUILayout.Height(position.height));
             {
@@ -37,9 +47,9 @@ public class UIAutomationTool : EditorWindow
                     //******************************请输入前缀******************************
                     GUILayout.Space(5f);
                     GUILayout.Label("请输入前缀:", GUILayout.Width(70f));
-                    if (GUILayout.Button("清空前缀", GUILayout.Width(200f))) 
+                    if (GUILayout.Button("清空前缀", GUILayout.Width(200f)))
                     {
-                        InputComponentName = string.Empty; 
+                        InputComponentName = string.Empty;
                     }
                     InputComponentName = GUILayout.TextField(InputComponentName, "BoldTextField", GUILayout.Width(200f));
                     //******************************生成Config脚本******************************
@@ -130,15 +140,26 @@ public class UIAutomationTool : EditorWindow
                     //******************************Transform组件获取打印******************************
                     GUILayout.Space(5f);
                     EditorGUILayout.LabelField("Transform组件获取打印:", GUILayout.Width(170f));//EditorStyles.label
+                    isAssign = GUILayout.Toggle(isAssign, "是否使用不赋值版本代码");
                     if (GUILayout.Button("Transform组件获取打印", GUILayout.Width(200)))
                     {
-                        ComponentFind(new FindConfig()
-                        {
-                            isAddPrefix = true,
-                            KeyValue = TransformPrefix,
-                            beginStr = InputTransformComponentName,
-                            findComponentType = FindConfig.FindComponentType.TfFing
-                        });
+                        //如果是不赋值版本的话
+                        if (isAssign)
+                            ComponentFind_DontAssign(new FindConfig()
+                            {
+                                isAddPrefix = true,
+                                KeyValue = TransformPrefix,
+                                beginStr = InputTransformComponentName,
+                                findComponentType = FindConfig.FindComponentType.TfFing
+                            });
+                        else
+                            ComponentFind(new FindConfig()
+                            {
+                                isAddPrefix = true,
+                                KeyValue = TransformPrefix,
+                                beginStr = InputTransformComponentName,
+                                findComponentType = FindConfig.FindComponentType.TfFing
+                            });
                     }
                     //******************************按钮监听代码******************************
                     GUILayout.Space(5f);
@@ -150,7 +171,7 @@ public class UIAutomationTool : EditorWindow
                         {
                             KeyValue = TransformPrefix,
                             beginStr = InputTransformComponentName,
-                            isAddPrefix= isAddPrefix,
+                            isAddPrefix = isAddPrefix,
                         });
                     }
                     //******************************组件重命名******************************
@@ -176,6 +197,45 @@ public class UIAutomationTool : EditorWindow
                             KeyValue = TransformPrefix,
                         });
                     }
+                    //******************************获取选中的物体组件获取******************************
+                    GUILayout.Space(5f);
+                    EditorGUILayout.LabelField($"获取选中的物体组件获取", GUILayout.Width(200f));//EditorStyles.label
+                    if (GUILayout.Button($"获取选中的物体组件获取", GUILayout.Width(200)))
+                    {
+                        GetSelectGoCompent(new FindConfig());
+                    }
+                }
+                GUILayout.EndVertical(); GUILayout.Space(5f);
+
+                //******************************Transform组件直接查找打印******************************可以直接使用
+                GUILayout.BeginVertical("box", GUILayout.Width(200f));
+                {
+                    EditorGUILayout.LabelField("Transform组件直接查找打印", EditorStyles.label);
+                    //******************************请输入Transform组件直接查找前缀******************************
+                    GUILayout.Space(5f);
+                    GUILayout.Label("请输入Transform组件查找前缀:", GUILayout.Width(200f));
+                    if (GUILayout.Button("清空前缀", GUILayout.Width(200f)))
+                    {
+                        TransformGetPrefix = string.Empty;
+                    }
+                    TransformGetPrefix = GUILayout.TextField(TransformGetPrefix, "BoldTextField", GUILayout.Width(200f));
+                    //******************************Transform组件直接获取打印******************************
+                    GUILayout.Space(5f);
+                    EditorGUILayout.LabelField("Transform组件直接获取打印:", GUILayout.Width(170f));//EditorStyles.label
+                    if (GUILayout.Button("Transform组件直接获取打印", GUILayout.Width(200)))
+                    {
+                        DirectGetTransformComonpentFind();
+                    }
+                    //******************************Transform组件直接获取打印******************************
+                    GUILayout.Space(5f);
+                    EditorGUILayout.LabelField("一键获取组件直接查找:", GUILayout.Width(170f));//EditorStyles.label
+                    if (GUILayout.Button("一键获取组件直接查找", GUILayout.Width(200)))
+                    {
+                        DirectGetTransformComonpent();
+                    }
+                    //******************************提示框******************************
+                    if (isCopyBoard3)
+                        EditorGUILayout.HelpBox("已经复制到剪切板", MessageType.Info, true);
                 }
                 GUILayout.EndVertical(); GUILayout.Space(5f);
             }
@@ -199,6 +259,187 @@ public class UIAutomationTool : EditorWindow
     private void OnSelectionChange() => Repaint();
 
     //******************************方法******************************
+
+    /// <summary>
+    /// 直接获取组件
+    /// </summary>
+    private void DirectGetTransformComonpent()
+    {
+        //获取到当前选择的物体
+        GameObject obj = Selection.objects.First() as GameObject;
+        Dictionary<string, List<Component>> controlDic = UIFindComponent.FindComponents(obj, TransformPrefix);
+        Dictionary<string, List<Component>> controlPathDic = new Dictionary<string, List<Component>>();
+        //数据转换
+        foreach (var item in controlDic.Values)
+        {
+            for (int i = 0; i < item.Count; i++)
+            {
+
+                //临时变量
+                List<string> strs = new List<string>();
+                Component component = item[i];
+                string strs1 = component.GetType().Name;
+                Transform transformTF = item[i].transform;
+                strs.Add(transformTF.name);
+                string path = string.Empty;
+                //获取路径
+                while (transformTF.parent != null)
+                {
+                    transformTF = transformTF.parent;
+                    if (transformTF.name == obj.name) break;
+                    strs.Add(transformTF.name);
+                }
+                //转换成路径
+                for (int j = strs.Count - 1; j >= 0; j--)
+                {
+                    //if (j != 0)
+                    //    path += $"{strs[j]}/";
+                    //else
+                    //    path += $"{strs[j]}";
+                    path += j != 0 ? $"{strs[j]}/" : $"{strs[j]}";
+                }
+                //添加到字典
+                if (!controlPathDic.ContainsKey(path))
+                    controlPathDic.Add(path, new List<Component>() { component });
+                else
+                    controlPathDic[path].Add(component);
+            }
+        }
+        //生成组件属性
+        StringBuilder sb = new StringBuilder();
+        sb.AppendLine("#region UI代码 自动化生成");
+        sb.AppendLine("#region 组件属性");
+        foreach (var item in controlPathDic.Values)
+        {
+            item.ForEach((component) =>
+            {
+                string componentName = component.name;
+                string type = component.GetType().Name;
+                switch (component.name)
+                {
+                    case "RectTransform": componentName = "Transform"; break;
+                }
+                sb.AppendLine($"public {type} {componentName}{type} {{ set; get; }}");
+            });
+        }
+        sb.AppendLine("#endregion");
+        //生成组件获取代码
+        sb.AppendLine().AppendLine();
+        sb.AppendLine("#region 组件通过路径获取");
+        sb.AppendLine("private void OnPathGetComponent()");
+        sb.AppendLine("{");
+        foreach (var item in controlPathDic)
+        {
+            item.Value.ForEach((component) =>
+            {
+                string componentName = component.name;
+                string type = component.GetType().Name;
+                switch (type)
+                {
+                    case "RectTransform": type = "Transform"; break;
+                }
+                sb.AppendLine($"\t{componentName}{type} = {TransformGetPrefix}.GetComponentInChildren<{type}>(\"{item.Key}\");");
+            });
+        }
+        sb.AppendLine("#endregion");
+        sb.AppendLine("}");
+        sb.AppendLine().AppendLine();
+        //按钮代码监听
+        sb.AppendLine("#region 按钮监听");
+        sb.AppendLine("private void OnAddListener()");
+        sb.AppendLine("{");
+        foreach (var item in controlPathDic)
+        {
+            item.Value.ForEach((component) =>
+            {
+                string componentName = component.name;
+                string type = component.GetType().Name;
+
+                switch (type)
+                {
+                    case "Button":
+                        sb.AppendLine($"\t{componentName}{type}.onClick.AddListener({componentName}AddListener));");
+                        break;
+                    case "Toggle":
+                        sb.AppendLine($"\t{componentName}{type}.onValueChanged.AddListener({componentName}AddListener)));");
+                        break;
+                }
+            });
+        }
+        sb.AppendLine("}");
+        sb.AppendLine("#endregion");
+        //Debug.Log(sb);
+        //显示提示信息
+        CopyWord(sb.ToString());
+        isCopyBoard3 = true;
+        CloseBoard();
+    }
+
+    /// <summary>
+    /// 直接获取组件--生成组件获取代码
+    /// </summary>
+    private void DirectGetTransformComonpentFind()
+    {
+        StringBuilder sb = new StringBuilder();
+        //获取到当前选择的物体
+        GameObject obj = Selection.objects.First() as GameObject;
+        Dictionary<string, List<Component>> controlDic = UIFindComponent.FindComponents(obj, TransformPrefix);
+        Dictionary<string, List<Component>> controlPathDic = new Dictionary<string, List<Component>>();
+        //数据转换
+        foreach (var item in controlDic.Values)
+        {
+            for (int i = 0; i < item.Count; i++)
+            {
+                //临时变量
+                List<string> strs = new List<string>();
+                Component component = item[i];
+                string strs1 = component.GetType().Name;
+                Transform transformTF = item[i].transform;
+                strs.Add(transformTF.name);
+                string path = string.Empty;
+                //获取路径
+                while (transformTF.parent != null)
+                {
+                    transformTF = transformTF.parent;
+                    if (transformTF.name == obj.name) break;
+                    strs.Add(transformTF.name);
+                }
+                //转换成路径
+                for (int j = strs.Count - 1; j >= 0; j--)
+                {
+                    //if (j != 0)
+                    //    path += $"{strs[j]}/";
+                    //else
+                    //    path += $"{strs[j]}";
+                    path += j != 0 ? $"{strs[j]}/" : $"{strs[j]}";
+                }
+                //添加到字典
+                if (!controlPathDic.ContainsKey(path))
+                    controlPathDic.Add(path, new List<Component>() { component });
+                else
+                    controlPathDic[path].Add(component);
+            }
+        }
+        //生成组件获取代码
+        foreach (var item in controlPathDic)
+        {
+            item.Value.ForEach((component) =>
+            {
+                string componentName = component.name;
+                string type = component.GetType().Name;
+                switch (type)
+                {
+                    case "RectTransform": type = "Transform"; break;
+                }
+                sb.AppendLine($"{TransformGetPrefix}.GetComponentInChildren<{type}>(\"{item.Key}\");");
+            });
+        }
+        Debug.Log(sb.ToString());
+        //显示提示信息
+        CopyWord(sb.ToString());
+        isCopyBoard3 = true;
+        CloseBoard();
+    }
     /// <summary>
     /// 一键生成
     /// </summary>
@@ -219,6 +460,66 @@ public class UIAutomationTool : EditorWindow
         sb.AppendLine(UIFindComponent.DebugOutAddListenerDemo(findtConfig));
         sb.AppendLine("#endregion");
         Debug.Log(sb.ToString());
+        GUIUtility.systemCopyBuffer = sb.ToString();
+    }
+
+    /// <summary>
+    /// 获取选中的物体的组件
+    /// </summary>
+    /// <param name="KeyValue"></param>
+    private void GetSelectGoCompent(FindConfig findtConfig)
+    {
+        //获取到当前选择的物体
+        GameObject obj1 = Selection.objects.First() as GameObject;
+        List<Component> components = new List<Component>();
+        List<string> vs = new List<string>()
+        {
+            typeof(Image).Name,
+            typeof(Transform).Name,
+            typeof(Button).Name ,
+            typeof(CanvasGroup).Name ,
+            typeof(Text).Name ,
+            //请后续自行添加
+        };
+        vs.ForEach((str) =>
+        {
+            Component Temp = obj1.transform.GetComponent(str);
+            if (Temp != null)
+                components.Add(Temp);
+        });
+        StringBuilder sb = new StringBuilder();
+        sb.AppendLine("#region 自动化获取代码组件");
+        foreach (var item in components)
+        {
+            string temp = item.GetType().Name;
+            switch (temp)
+            {
+                case "RectTransform":
+                    temp = "Transform";
+                    break;
+            }
+            sb.AppendLine($"public {temp} {item.gameObject.name}{temp} {{ set; get; }}");
+        }
+        sb.AppendLine();
+        sb.AppendLine("/// <summary>");
+        sb.AppendLine("/// 获取选中物体的组件");
+        sb.AppendLine("/// </summary>");
+        sb.AppendLine("private void OnGetSelectComponent()");
+        sb.AppendLine("{");
+        foreach (var item in components)
+        {
+            string temp = item.GetType().Name;
+            switch (temp)
+            {
+                case "RectTransform":
+                    temp = "Transform";
+                    break;
+            }
+            sb.AppendLine($"\t{item.gameObject.name}{temp} = GetComponent<{temp}>();");
+        }
+        sb.AppendLine("}");
+        sb.AppendLine("#endregion");
+        //Debug.Log(sb);
         GUIUtility.systemCopyBuffer = sb.ToString();
     }
 
@@ -253,6 +554,17 @@ public class UIAutomationTool : EditorWindow
         GameObject obj = Selection.objects.First() as GameObject;
         findtConfig.controlDic = UIFindComponent.FindComponents(obj, findtConfig.KeyValue);
         UIFindComponent.DebugOutGetComponentDemo(findtConfig);//getComponent.
+    }
+
+    /// <summary>
+    /// 打印组件查找代码-不赋值版本-使用地方:直接获取物体组件时使用
+    /// </summary>
+    private void ComponentFind_DontAssign(FindConfig findtConfig)
+    {
+        //获取到当前选择的物体
+        GameObject obj = Selection.objects.First() as GameObject;
+        findtConfig.controlDic = UIFindComponent.FindComponents(obj, findtConfig.KeyValue);
+        UIFindComponent.DebugOutGetComponentDemo_DontAssign(findtConfig);//getComponent.
     }
 
     /// <summary>
@@ -341,4 +653,23 @@ public class UIAutomationTool : EditorWindow
         }
     }
 
+    /// <summary>
+    /// 将信息复制到剪切板当中 https://blog.csdn.net/LLLLL__/article/details/114463650
+    /// </summary>
+    public void CopyWord(string str)
+    {
+        TextEditor te = new TextEditor();
+        te.text = str;
+        te.SelectAll();
+        te.Copy();
+    }
+
+    /// <summary>
+    /// 关闭提示版
+    /// </summary>
+    private async void CloseBoard()
+    {
+        await Task.Delay(500);
+        isCopyBoard3 = false;
+    }
 }

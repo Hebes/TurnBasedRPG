@@ -20,6 +20,7 @@ public class UIFindComponent : Editor
     public static Dictionary<string, List<Component>> FindComponents(GameObject obj, string keyValue)
     {
         Dictionary<string, List<Component>> controlDic = new Dictionary<string, List<Component>>();
+        
         //查找组件
         FindChildrenControl<Button>(obj, controlDic, keyValue);
         FindChildrenControl<Image>(obj, controlDic, keyValue);
@@ -91,7 +92,7 @@ public class UIFindComponent : Editor
     /// <summary>
     /// 字典重新排列
     /// </summary>
-    private static Dictionary<string, List<string>> ReArrangeDic(Dictionary<string, List<Component>> controlDic)
+    public static Dictionary<string, List<string>> ReArrangeDic(Dictionary<string, List<Component>> controlDic)
     {
         //重新排列
         Dictionary<string, List<string>> controlDicTemp = new Dictionary<string, List<string>>();
@@ -218,7 +219,7 @@ public class UIFindComponent : Editor
 
     //******************************打印里面输出组件查找代码******************************
     /// <summary>
-    /// 
+    /// Transform组件查找
     /// </summary>
     /// <param name="beginStr"></param>
     /// <param name="controlDic"></param>
@@ -259,11 +260,54 @@ public class UIFindComponent : Editor
                 default:
                     break;
             }
-
-
             sb.AppendLine();
         }
         sb.AppendLine("}");
+        sb.AppendLine("#endregion");
+        Debug.Log(sb.ToString());
+        GUIUtility.systemCopyBuffer = sb.ToString();
+        return sb.ToString();
+    }
+
+    /// <summary>
+    /// Transform组件查找--使用地方:直接获取物体组件时使用
+    /// </summary>
+    /// <param name="beginStr"></param>
+    /// <param name="controlDic"></param>
+    public static string DebugOutGetComponentDemo_DontAssign(FindConfig findtConfig)
+    {
+        //添加前缀
+        string beginStr = findtConfig.isAddPrefix ? AddPrefix(findtConfig.beginStr) : string.Empty;
+        //字典重新排列 重新排列
+        Dictionary<string, List<string>> controlDicTemp = ReArrangeDic(findtConfig.controlDic);
+        //打印
+        StringBuilder sb = new StringBuilder();
+        sb.AppendLine("#region 直接获取组件模块");
+        foreach (var item in controlDicTemp)
+        {
+            string itemKey = item.Key;
+            //过滤模块
+            switch (item.Key)
+            {
+                case "RectTransform":
+                    itemKey = "Transform";
+                    break;
+            }
+            switch (findtConfig.findComponentType)
+            {
+                case FindConfig.FindComponentType.UIFind:
+                    foreach (var child in item.Value)
+                        sb.AppendLine($"\t{beginStr}Get{itemKey}(\"{child}\");");
+                    break;
+                case FindConfig.FindComponentType.TfFing:
+                    foreach (var child in item.Value)
+                        sb.AppendLine($"\t{beginStr}OnGet{itemKey}(\"{child}\");");
+                    break;
+                default:
+                    break;
+            }
+            sb.AppendLine();
+        }
         sb.AppendLine("#endregion");
         Debug.Log(sb.ToString());
         GUIUtility.systemCopyBuffer = sb.ToString();

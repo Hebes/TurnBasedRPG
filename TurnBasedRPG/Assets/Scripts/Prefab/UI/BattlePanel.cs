@@ -84,6 +84,6 @@ public class BattlePanel : BasePanel
     /// </summary>
     public void ClearHeroBar()
     {
-        T_HeroPanelSpacerTransform.tfClearChild();
+        T_HeroPanelSpacerTransform.ClearChild();
     }
 }

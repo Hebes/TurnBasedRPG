@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// 敌人管理
+/// </summary>
 public class EnemyStateMaschine : MonoBehaviour
 {
     /// <summary>战斗管理类</summary>
@@ -36,8 +39,8 @@ public class EnemyStateMaschine : MonoBehaviour
         DEAD,
     }
 
-    public float cur_colldown = 0f;
-    public float max_colldown = 5f;
+    [Tooltip("当前冷却时间")] public float cur_colldown = 0f;
+    [Tooltip("一共冷却时间")] public float max_colldown = 5f;
 
     /// <summary>选择器物体 就是角色头上顶的黄色小物体</summary>
     [Tooltip("选择器物体 就是角色头上顶的黄色小物体")] public GameObject Selector;
@@ -82,6 +85,7 @@ public class EnemyStateMaschine : MonoBehaviour
             {TurnState.DEAD.ToString(),new EnemyDeadState(enemyFSMSystem,this) },
         };
         enemyFSMSystem.ChangeGameState(TurnState.PROCESSING.ToString(), this);
+        Debug.Log("怪物的当前状态是：" + enemyFSMSystem.GetCurState);
     }
     private void Update()
     {

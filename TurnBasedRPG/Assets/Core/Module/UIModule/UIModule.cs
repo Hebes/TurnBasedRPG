@@ -190,7 +190,7 @@ public class UIModule : BaseManager<UIModule>
     /// <param name="control">控件对象</param>
     /// <param name="type">事件类型</param>
     /// <param name="callBack">事件的响应函数</param>
-    public static void AddCustomEventListener(UIBehaviour control, EventTriggerType type, UnityAction<BaseEventData> callBack)
+    public static void AddCustomEventListener(Component control, EventTriggerType type, UnityAction<BaseEventData> callBack)
     {
         EventTrigger trigger = control.GetComponent<EventTrigger>();
         if (trigger == null)

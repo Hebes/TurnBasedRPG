@@ -32,7 +32,6 @@ public class EnemySelectButton : MonoBehaviour
 
     public void Init()
     {
-        DLog.Log("初始化敌人选择按钮");
         OnGetComponent();
         Button button = GetComponent<Button>();
         button.onClick.AddListener(SelectEnemy);

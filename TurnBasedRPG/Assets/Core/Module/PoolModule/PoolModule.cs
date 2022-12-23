@@ -105,12 +105,7 @@ public class PoolModule : SingletonAutoMono<PoolModule>
     /// </summary>
     public void PushObj(string name, GameObject obj)
     {
-        if (poolObj == null)
-        {
-            poolObj = new GameObject("Pool");
-            DontDestroyOnLoad(poolObj);
-        }
-
+        if (poolObj == null) poolObj = new GameObject("Pool");
         if (poolDic.ContainsKey(name))//里面有抽屉
             poolDic[name].PushObj(obj);
         else//里面没有抽屉

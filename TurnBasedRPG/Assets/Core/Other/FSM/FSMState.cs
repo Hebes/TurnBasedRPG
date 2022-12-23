@@ -6,7 +6,6 @@ using UnityEngine;
 
 public abstract class FSMState
 {
-    public string StateID { get; set; }
     protected FSMSystem fSMSystem { get; set; }
 
     public FSMState(FSMSystem fSMSystem, object obj = null) => this.fSMSystem = fSMSystem;

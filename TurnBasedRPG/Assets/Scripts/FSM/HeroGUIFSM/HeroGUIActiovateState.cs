@@ -51,7 +51,7 @@ internal class HeroGUIActiovateState : FSMState
             battleManager.HerosToManage[0].transform.Find("T_Selector").gameObject.SetActive(true);
             battleManager.HeroChoise = new HandleTurn();
             battleManager.battlePanel.ActionPanel(true);
-
+            
             //populate action buttons 填充操作按钮
             CreateAttackButtons();
             battleManager.HeroGUIFSMSystem.ChangeGameState(BattleManager.HeroGUI.WAITING.ToString());
@@ -83,7 +83,7 @@ internal class HeroGUIActiovateState : FSMState
             {
                 Transform MagicButton = GameObject.Instantiate(magicButton, magicSpacer);
                 MagicButton.OnGetText("Text").text = magicAtk.attackName;
-                MagicButton.GetComponent<Button>().onClick.AddListener(()=> { Input4(magicAtk); });
+                MagicButton.GetComponent<Button>().onClick.AddListener(() => { Input4(magicAtk); });
                 battleManager.atkBtns.Add(MagicButton);
             }
         }

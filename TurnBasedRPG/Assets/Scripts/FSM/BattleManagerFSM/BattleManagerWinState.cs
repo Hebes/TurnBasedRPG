@@ -30,9 +30,6 @@ internal class BattleManagerWinState : FSMState
         {
             title = "系统提示",
             countent = "你赢了",
-        }, (panel) =>
-        {
-
         });
 
         for (int i = 0; i < battleManager.HerosInBattle.Count; i++)

@@ -36,8 +36,11 @@ internal class World_StateGameState : FSMState
                 theName = $"hero1",
                 baseHP = 110,
                 curHP = 110,
+                BaseMP=10,
+                curMP=10,
                 baeATK = 10,
                 curAtk = 10,
+                LV=100,
                 attacks = new List<BaseAttack>()
                 {
                     { new BaseAttack(){attackName="hero物理攻击1",attackDescription="hero物理攻击1",attackCost=0,attackDamage=0, } },
@@ -60,8 +63,11 @@ internal class World_StateGameState : FSMState
                 theName = $"hero2",
                 baseHP = 110,
                 curHP = 110,
+                BaseMP = 20,
+                curMP = 20,
                 baeATK = 10,
                 curAtk = 10,
+                LV = 100,
                 attacks = new List<BaseAttack>()
                 {
                     { new BaseAttack(){attackName=$"{heroPrefab.hero.theName}物理攻击1",attackDescription=$"{heroPrefab.hero.theName}物理攻击1",attackCost=0,attackDamage=0, } },
@@ -74,6 +80,16 @@ internal class World_StateGameState : FSMState
                 },
             };
             scene01Manager.heroBattleLists.Add(heroPrefab.gameObject);
+        }
+
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            Debug.Log("打开玩家信息界面");
+            GameRoot.Instance.uiModule.ShowPanel<CharacterInfoPanel>(new UIInfo<CharacterInfoPanel>() 
+            {
+                layer=E_UI_Layer.Mid,
+                panelName=ConfigUIPrefab.CharacterInfoPanel,
+            });
         }
     }
 
