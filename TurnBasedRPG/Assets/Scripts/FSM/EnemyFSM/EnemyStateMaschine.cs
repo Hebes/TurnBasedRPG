@@ -39,9 +39,6 @@ public class EnemyStateMaschine : MonoBehaviour
         DEAD,
     }
 
-    [Tooltip("当前冷却时间")] public float cur_colldown = 0f;
-    [Tooltip("一共冷却时间")] public float max_colldown = 5f;
-
     /// <summary>选择器物体 就是角色头上顶的黄色小物体</summary>
     [Tooltip("选择器物体 就是角色头上顶的黄色小物体")] public GameObject Selector;
 

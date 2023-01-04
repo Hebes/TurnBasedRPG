@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public static class TransformExpand
@@ -146,7 +148,19 @@ public static class TransformExpand
     }
     #endregion
 
-    //*********************************组件清空子物体*********************************
+    #region 查找自身组件拓展
+    /// <summary>
+    /// 查找自身Button组件
+    /// </summary>
+    /// <param name="transform"></param>
+    /// <returns></returns>
+    public static Button OnGetButton(this Transform transform)
+    {
+        return transform.GetComponent<Button>();
+    }
+    #endregion
+
+    //*********************************清空子拓展*********************************
     /// <summary>
     /// 清空子物体
     /// </summary>
@@ -176,6 +190,33 @@ public static class TransformExpand
                 GameObject.Destroy(transform.GetChild(t).gameObject);
             }
         }
+    }
+
+    //*********************************通过Transform实例化*********************************
+
+    /// <summary>
+    /// 实例化拓展
+    /// </summary>
+    /// <param name="transform"></param>
+    /// <param name="parent"></param>
+    /// <returns></returns>
+    public static Transform InstantiatePrefa(this Transform transform, Transform parent)
+    {
+        return GameObject.Instantiate(transform, parent);
+    }
+    /// <summary>
+    /// 实例化拓展
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    /// <param name="transform"></param>
+    /// <param name="parent"></param>
+    /// <returns></returns>
+    public static T InstantiatePrefa<T>(this Transform transform, Transform parent) where T : Component
+    {
+        Transform temp = GameObject.Instantiate(transform, parent);
+        T Ttemp = temp.GetComponent<T>();
+        if (Ttemp == null) { return Ttemp.gameObject.AddComponent<T>(); }
+        return Ttemp;
     }
 }
 

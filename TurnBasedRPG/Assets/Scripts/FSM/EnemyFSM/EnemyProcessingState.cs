@@ -20,8 +20,8 @@ public class EnemyProcessingState : FSMState
     /// </summary>
     private void UpgradeProgressBar()
     {
-        enemyStateMaschine.cur_colldown = enemyStateMaschine.cur_colldown + Time.deltaTime;
-        if (enemyStateMaschine.cur_colldown >= enemyStateMaschine.max_colldown)//如果冷却时间到了
+        enemyStateMaschine.enemy.cur_colldown = enemyStateMaschine.enemy.cur_colldown + Time.deltaTime;
+        if (enemyStateMaschine.enemy.cur_colldown >= enemyStateMaschine.enemy.max_colldown)//如果冷却时间到了
             enemyStateMaschine.enemyFSMSystem.ChangeGameState(EnemyStateMaschine.TurnState.CHOOSEACTION.ToString());
     }
 }

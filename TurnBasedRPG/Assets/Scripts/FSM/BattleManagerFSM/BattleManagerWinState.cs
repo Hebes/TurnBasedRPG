@@ -11,6 +11,9 @@
 
 using UnityEngine;
 
+/// <summary>
+/// 游戏胜利的话
+/// </summary>
 internal class BattleManagerWinState : FSMState
 {
     public BattleManager battleManager { get; private set; }
@@ -26,16 +29,17 @@ internal class BattleManagerWinState : FSMState
         base.DoEnter(obj);
 
         //显示结算面板 需要自己填写
-        PanelExpand.ShowTopHint(new HintInfo()
-        {
-            title = "系统提示",
-            countent = "你赢了",
-        });
+        //PanelExpand.ShowTopHint(new HintInfo()
+        //{
+        //    title = "系统提示",
+        //    countent = "你赢了",
+        //});
 
         for (int i = 0; i < battleManager.HerosInBattle.Count; i++)
             battleManager.HerosInBattle[i].GetComponent<HeroStateMaschine>().heroFSMSystem.ChangeGameState(HeroStateMaschine.TurnState.WAITING.ToString());
         //TODO 如果不跳转场景敌人会继续攻击
         battleManager.battlePanel.ClearHeroBar();
+        GameRoot.Instance.uiModule.HidePanel(ConfigUIPrefab.BattlePanel);
         //加载进入战斗前的场景
         SceneMG.Instance.LoadSceneAfterBattle();
         SceneMG.Instance.sceneMgrFSMSystem.ChangeGameState(SceneMG.GameStates.WORLD_STATE.ToString());

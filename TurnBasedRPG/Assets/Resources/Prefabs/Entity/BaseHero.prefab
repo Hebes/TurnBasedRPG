@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 198345131560401205}
   - component: {fileID: 2495047872915200943}
   - component: {fileID: 5133629733390781969}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: T_Selector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -79,8 +79,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -286748881
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 110d475dd52844c538022863885cdb1f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 1595899076744008523}
   - component: {fileID: 7748094727671264676}
   - component: {fileID: 1365194134346614001}
-  m_Layer: 5
+  m_Layer: 10
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -172,8 +172,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -286748881
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 1040835568, guid: a6fe5c25d581b4fb0894b1c86b12c8c3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -196,8 +196,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3792239891506885577}
   - component: {fileID: 3890926370587823210}
-  - component: {fileID: 8213549705676035917}
-  m_Layer: 5
+  - component: {fileID: 5355534452514875934}
+  m_Layer: 10
   m_Name: BaseHero
   m_TagString: Hero
   m_Icon: {fileID: 0}
@@ -229,7 +229,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7071650399305541670}
   m_CullTransparentMesh: 1
---- !u!114 &8213549705676035917
+--- !u!114 &5355534452514875934
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -242,34 +242,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hero:
-    theName: hero1
-    LV: 100
-    baseHP: 110
-    curHP: 110
-    BaseMP: 10
-    curMP: 10
-    baeATK: 10
-    curAtk: 10
+    theName: 
+    LV: 0
+    baseHP: 0
+    curHP: 0
+    BaseMP: 0
+    curMP: 0
+    baeATK: 0
+    curAtk: 0
     baseDEF: 0
     curDEF: 0
-    attacks:
-    - attackName: "hero\u7269\u7406\u653B\u51FB1"
-      attackDescription: "hero\u7269\u7406\u653B\u51FB1"
-      attackDamage: 0
-      attackCost: 0
-    - attackName: "hero\u7269\u7406\u653B\u51FB2"
-      attackDescription: "hero\u7269\u7406\u653B\u51FB2"
-      attackDamage: 0
-      attackCost: 0
-    MagicAttacks:
-    - attackName: "hero\u9B54\u6CD5\u653B\u51FB1"
-      attackDescription: "hero\u9B54\u6CD5\u653B\u51FB1"
-      attackDamage: 0
-      attackCost: 0
-    - attackName: "hero\u9B54\u6CD5\u653B\u51FB2"
-      attackDescription: "hero\u9B54\u6CD5\u653B\u51FB2"
-      attackDamage: 0
-      attackCost: 0
+    cur_colldown: 0
+    max_colldown: 5
+    attacks: []
+    MagicAttacks: []
     stamina: 0
     intellect: 0
     dexterity: 0

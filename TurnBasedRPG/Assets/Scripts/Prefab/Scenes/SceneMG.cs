@@ -37,15 +37,12 @@ public class SceneMG : SingletonAutoMono<SceneMG>
         /// <summary>怪物ID</summary>
         public List<int> enemyInfoLists = new List<int>();
     }
-
-    /// <summary>敌人数量</summary>
-    public int enemyAmount;
     /// <summary>战斗的怪物列表 </summary>
-    public List<GameObject> enemysToBattleLists = new List<GameObject>();
+    public List<BaseEnemy> enemysToBattleLists = new List<BaseEnemy>();
     /// <summary>每个场景对应的有哪些怪物怪物</summary>
     public RegionData Region;
-    /// <summary>英雄进入战斗后生成的列表</summary>
-    public List<GameObject> heroBattleLists = new List<GameObject>();
+    /// <summary>英雄进入战斗后生成的列表-英雄的数据</summary>
+    public List<BaseHero> heroBattleLists = new List<BaseHero>();
 
     /// <summary>重生点 SPAWNPOINTS</summary>
     public string nextSpawnPoint;

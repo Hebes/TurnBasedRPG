@@ -1,3 +1,6 @@
+using System;
+using System.Data;
+using System.Text;
 using UnityEditor;
 using UnityEngine;
 
@@ -53,6 +56,10 @@ public class CSVAnalysisWindow : EditorWindow
                 {
                     //CSVClass.CSVAnalysis<Charect>($"Assets/{LoadCSVPath.Split("Assets")[1]}");
                 }
+                if (GUILayout.Button("Excel转换CSV", GUILayout.Width(110f)))
+                {
+                    
+                }
             }
             EditorGUILayout.EndHorizontal();
         }
@@ -105,4 +112,7 @@ public class CSVAnalysisWindow : EditorWindow
     /// 开启窗口的重绘，不然窗口信息不会刷新
     /// </summary>
     void OnInspectorUpdate() => Repaint();
+
+    
+
 }

@@ -175,6 +175,17 @@ public class UIModule : BaseManager<UIModule>
     }
 
     /// <summary>
+    /// 隐藏所有面板
+    /// </summary>
+    public void HideAllPanel(object obj = null)
+    {
+        foreach (KeyValuePair<string, BasePanel> panel in panelDic)
+        {
+            HidePanel(panel.Key, obj);
+        }
+    }
+
+    /// <summary>
     /// 得到某一个已经显示的面板 方便外部使用
     /// </summary>
     public T GetPanel<T>(string name) where T : BasePanel

@@ -30,8 +30,8 @@ internal class World_StateGameState : FSMState
         //todo 下面代码后面需要改到战斗状态中
         if (Input.GetKeyDown(KeyCode.U))
         {
-            HeroStateMaschine heroPrefab = GameRoot.Instance.prefabMgr.GetPrefab<HeroStateMaschine>(ConfigUIPrefab.BaseHero);
-            heroPrefab.hero = new BaseHero()
+            string tempname = $"hero1";
+            BaseHero hero = new BaseHero()
             {
                 theName = $"hero1",
                 baseHP = 110,
@@ -43,22 +43,22 @@ internal class World_StateGameState : FSMState
                 LV=100,
                 attacks = new List<BaseAttack>()
                 {
-                    { new BaseAttack(){attackName="hero物理攻击1",attackDescription="hero物理攻击1",attackCost=0,attackDamage=0, } },
-                    { new BaseAttack(){attackName="hero物理攻击2",attackDescription="hero物理攻击2",attackCost=0,attackDamage=0, } },
+                    { new BaseAttack(){attackName=$"{tempname}物理攻击1",attackDescription=$"{tempname}物理攻击1",attackCost=0,attackDamage=0, } },
+                    { new BaseAttack(){attackName=$"{tempname}物理攻击2",attackDescription=$"{tempname}物理攻击2",attackCost=0,attackDamage=0, } },
                 },
                 MagicAttacks = new List<BaseAttack>() 
                 {
-                    { new BaseAttack(){attackName="hero魔法攻击1",attackDescription="hero魔法攻击1",attackCost=0,attackDamage=0, } },
-                    { new BaseAttack(){attackName="hero魔法攻击2",attackDescription="hero魔法攻击2",attackCost=0,attackDamage=0, } },
+                    { new BaseAttack(){attackName=$"{tempname}魔法攻击1",attackDescription=$"{tempname}魔法攻击1",attackCost=0,attackDamage=0, } },
+                    { new BaseAttack(){attackName=$"{tempname}魔法攻击2",attackDescription=$"{tempname}魔法攻击2",attackCost=0,attackDamage=0, } },
                 },
             };
-            scene01Manager.heroBattleLists.Add(heroPrefab.gameObject);
+            scene01Manager.heroBattleLists.Add(hero);
         }
         //todo 下面代码后面需要改到战斗状态中
         if (Input.GetKeyDown(KeyCode.I))
         {
-            HeroStateMaschine heroPrefab = GameRoot.Instance.prefabMgr.GetPrefab<HeroStateMaschine>(ConfigUIPrefab.BaseHero);
-            heroPrefab.hero = new BaseHero()
+            string tempname = $"hero2";
+            BaseHero hero = new BaseHero()
             {
                 theName = $"hero2",
                 baseHP = 110,
@@ -70,26 +70,16 @@ internal class World_StateGameState : FSMState
                 LV = 100,
                 attacks = new List<BaseAttack>()
                 {
-                    { new BaseAttack(){attackName=$"{heroPrefab.hero.theName}物理攻击1",attackDescription=$"{heroPrefab.hero.theName}物理攻击1",attackCost=0,attackDamage=0, } },
-                    { new BaseAttack(){attackName=$"{heroPrefab.hero.theName}物理攻击2",attackDescription=$"{heroPrefab.hero.theName}物理攻击2",attackCost=0,attackDamage=0, } },
+                    { new BaseAttack(){attackName=$"{tempname}物理攻击1",attackDescription=$"{tempname}物理攻击1",attackCost=0,attackDamage=0, } },
+                    { new BaseAttack(){attackName=$"{tempname}物理攻击2",attackDescription=$"{tempname}物理攻击2",attackCost=0,attackDamage=0, } },
                 },
                 MagicAttacks = new List<BaseAttack>()
                 {
-                    { new BaseAttack(){attackName=$"{heroPrefab.hero.theName}魔法攻击1",attackDescription=$"{heroPrefab.hero.theName}魔法攻击1",attackCost=0,attackDamage=0, } },
-                    { new BaseAttack(){attackName=$"{heroPrefab.hero.theName}魔法攻击2",attackDescription=$"{heroPrefab.hero.theName}魔法攻击2",attackCost=0,attackDamage=0, } },
+                    { new BaseAttack(){attackName=$"{tempname}魔法攻击1",attackDescription=$"{tempname}魔法攻击1",attackCost=0,attackDamage=0, } },
+                    { new BaseAttack(){attackName=$"{tempname}魔法攻击2",attackDescription=$"{tempname}魔法攻击2",attackCost=0,attackDamage=0, } },
                 },
             };
-            scene01Manager.heroBattleLists.Add(heroPrefab.gameObject);
-        }
-
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            Debug.Log("打开玩家信息界面");
-            GameRoot.Instance.uiModule.ShowPanel<CharacterInfoPanel>(new UIInfo<CharacterInfoPanel>() 
-            {
-                layer=E_UI_Layer.Mid,
-                panelName=ConfigUIPrefab.CharacterInfoPanel,
-            });
+            scene01Manager.heroBattleLists.Add(hero);
         }
     }
 

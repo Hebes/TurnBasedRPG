@@ -16,6 +16,7 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using LogUtils;
 using System;
+using UnityEngine.EventSystems;
 
 /// <summary>
 /// 回合处理类
@@ -124,39 +125,41 @@ public class BattleManager : MonoBehaviour
     /// <summary>玩家回合需要做的事情的配置</summary>
     public HandleTurn HeroChoise;
 
-    /// <summary>选择敌人的按钮模板</summary>
-    public EnemySelectButton enemyButton;
+    public Transform enemyButtonTF { get; private set; }
+
     /// <summary>生成敌人按钮的父物体</summary>
     public Transform Spacer;
 
-
-
     private void Awake()
     {
+        EnemyStateMaschine BaseEnemy = GameRoot.Instance.prefabMgr.GetPrefab<EnemyStateMaschine>(ConfigUIPrefab.BaseEnemy);
+        HeroStateMaschine heroStateMaschine = GameRoot.Instance.prefabMgr.GetPrefab<HeroStateMaschine>(ConfigUIPrefab.BaseHero);
         GameRoot.Instance.battleManager = this;
         sceneManager = GameRoot.Instance.sceneManager;
         //实例化sceneManager里面的敌人的战斗列表
-        for (int i = 0; i < sceneManager.enemyAmount; i++)
+        for (int i = 0; i < sceneManager.enemysToBattleLists.Count; i++)
         {
-            GameObject NewEnemy = Instantiate(sceneManager.enemysToBattleLists[i], enemySpawnPoints[i]);
-            NewEnemy.name = NewEnemy.GetComponent<EnemyStateMaschine>().enemy.theName + "_" + (i + 1);
-            NewEnemy.GetComponent<EnemyStateMaschine>().enemy.theName = NewEnemy.name;
+            EnemyStateMaschine NewEnemy = Instantiate(BaseEnemy, enemySpawnPoints[i]);
+            NewEnemy.enemy = sceneManager.enemysToBattleLists[i];
+            NewEnemy.name = NewEnemy.enemy.theName + "_" + (i + 1);
+            NewEnemy.enemy.theName = NewEnemy.name;
             EnemysInBattle.Add(NewEnemy.gameObject);
         }
         //实例化sceneManager里面的英雄的战斗列表
         for (int i = 0; i < sceneManager.heroBattleLists.Count; i++)
         {
-            GameObject NewHero = Instantiate(sceneManager.heroBattleLists[i], heroSpawnPoints[i]);
-            NewHero.name = NewHero.GetComponent<HeroStateMaschine>().hero.theName + "_" + (i + 1);
-            NewHero.GetComponent<HeroStateMaschine>().hero.theName = NewHero.name;
+            HeroStateMaschine NewHero = Instantiate(heroStateMaschine, heroSpawnPoints[i]);
+            NewHero.hero = sceneManager.heroBattleLists[i];
+            NewHero.name = NewHero.hero.theName + "_" + (i + 1);
+            NewHero.hero.theName = NewHero.name;
             HerosInBattle.Add(NewHero.gameObject);
         }
 
-        enemyButton = GameRoot.Instance.prefabMgr.GetPrefab<EnemySelectButton>(ConfigUIPrefab.TargetButton);
+        enemyButtonTF = GameRoot.Instance.prefabMgr.GetPrefab<Transform>(ConfigUIPrefab.TargetButton);
         GameRoot.Instance.uiModule.ShowPanel(new UIInfo<BattlePanel>()
         {
             panelName = ConfigUIPrefab.BattlePanel,
-            layer = E_UI_Layer.Bottom,
+            layer = E_UI_Layer.Top,
             callBack = (obj) => { battlePanel = obj; },
         });
     }
@@ -213,6 +216,7 @@ public class BattleManager : MonoBehaviour
     /// </summary>
     public void EnemyButtons()
     {
+
         //cleanup 清理
         foreach (GameObject enemyBtn in enemytBtns) { Destroy(enemyBtn); }
         enemytBtns.Clear();
@@ -220,17 +224,54 @@ public class BattleManager : MonoBehaviour
         //创建选择敌人按钮
         foreach (var enemy in EnemysInBattle)
         {
-            EnemySelectButton newButton = Instantiate(enemyButton, battlePanel.T_TargetSpacerTransform);//创建敌人选择按钮
-            //TODO newButton的Awake不会执行
-            newButton.Init();
-
             EnemyStateMaschine cur_enemy = enemy.GetComponent<EnemyStateMaschine>();
-            //newButton.transform.Find("T_Text").GetComponent<Text>().text = cur_enemy.enemy.theName;
-            newButton.T_TextText.text = cur_enemy.enemy.theName;
-
-            newButton.EnemyPrefab = enemy;
+            Transform newButton = enemyButtonTF.InstantiatePrefa(battlePanel.T_TargetSpacerTransform);//创建敌人选择按钮
+            newButton.OnGetText("T_Text").text = $"{cur_enemy.enemy.theName}";
+            newButton.OnGetButton().onClick.AddListener(() =>
+            {
+                GameRoot.Instance.battleManager.Input2(enemy);
+                enemy.transform.Find("T_Selector").gameObject.SetActive(false);
+            });
+            newButton.AddEventTriggerListener(EventTriggerType.PointerEnter, (baseEventData) =>
+            {
+                enemy.transform.Find("T_Selector").gameObject.SetActive(true);
+            });
+            newButton.AddEventTriggerListener(EventTriggerType.PointerExit, (baseEventData) =>
+            {
+                enemy.transform.Find("T_Selector").gameObject.SetActive(false);
+            });
             enemytBtns.Add(newButton.gameObject);
         }
+
+        ////cleanup 清理
+        //foreach (GameObject enemyBtn in enemytBtns) { Destroy(enemyBtn); }
+        //enemytBtns.Clear();
+        ////敌人按钮适配Unity 5 Tutorial: Turn Based Battle System #07 - Gui Improvements
+        ////创建选择敌人按钮
+
+        //foreach (var enemy in EnemysInBattle)
+        //{
+        //    EnemyStateMaschine cur_enemy = enemy.GetComponent<EnemyStateMaschine>();
+        //    enemyButtonTF.Prefa_EnemySelectButton(new PrefabExpand.PrefabExpandConfig1()
+        //    {
+        //        name = cur_enemy.enemy.theName,
+        //        parent= battlePanel.T_TargetSpacerTransform,
+        //        unityAction1 = (go) => 
+        //        {
+        //            GameRoot.Instance.battleManager.Input2(enemy);
+        //            enemy.transform.Find("T_Selector").gameObject.SetActive(false);
+        //        },
+        //        PointerEnterCallBack = (baseEventData,go) => 
+        //        {
+        //            enemy.transform.Find("T_Selector").gameObject.SetActive(true);
+        //        },
+        //        PointerExitCallBack= (baseEventData, go) =>
+        //        {
+        //            enemy.transform.Find("T_Selector").gameObject.SetActive(false);
+        //        },
+        //    });
+        //    enemytBtns.Add(cur_enemy.gameObject);
+        //}
     }
 
     /// <summary>
@@ -251,14 +292,21 @@ public class BattleManager : MonoBehaviour
         HeroGUIFSMSystem.ChangeGameState(HeroGUI.DONE.ToString());
 
         Debug.Log("敌人可以行动");
-        // 敌人可以行动
-        foreach (var item in EnemysInBattle)
-        {
-            EnemyStateMaschine enemyStateMaschine = item.GetComponent<EnemyStateMaschine>();
-            string enemyCurState = enemyStateMaschine.enemyFSMSystem.GetCurState;//怪物当前状态
-            if (enemyCurState == EnemyStateMaschine.TurnState.WAITING.ToString())//如果是进度条上升的状态的话
-                item.GetComponent<EnemyStateMaschine>().enemyFSMSystem.ChangeGameState(EnemyStateMaschine.TurnState.PROCESSING.ToString());//就切换到等待状态,英雄操作完毕后在转换回来
-        }
+        //// 敌人可以行动
+        //foreach (var item in EnemysInBattle)
+        //{
+        //    EnemyStateMaschine enemyStateMaschine = item.GetComponent<EnemyStateMaschine>();
+        //    string enemyCurState = enemyStateMaschine.enemyFSMSystem.GetCurState;//怪物当前状态
+        //    if (enemyCurState == EnemyStateMaschine.TurnState.WAITING.ToString())//如果是进度条上升的状态的话
+        //        item.GetComponent<EnemyStateMaschine>().enemyFSMSystem.ChangeGameState(EnemyStateMaschine.TurnState.PROCESSING.ToString());//就切换到等待状态,英雄操作完毕后在转换回来
+        //}
+
+        //HerosInBattle?.ForEach((go)=>
+        //{
+        //    string heroCurState = go.GetComponent<HeroStateMaschine>().heroFSMSystem.GetCurState;
+        //    if (heroCurState == HeroStateMaschine.TurnState.WAITING.ToString())//如果是进度条上升的状态的话
+        //        go.GetComponent<HeroStateMaschine>().heroFSMSystem.ChangeGameState(EnemyStateMaschine.TurnState.PROCESSING.ToString());//就切换到等待状态,英雄操作完毕
+        //});
     }
 
     /// <summary>

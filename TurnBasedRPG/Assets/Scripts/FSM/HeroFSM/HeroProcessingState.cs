@@ -23,8 +23,8 @@ public class HeroProcessingState : FSMState
     /// </summary>
     private void UpgradeProgressBar()
     {
-        heroStateMaschine.cur_colldown = heroStateMaschine.cur_colldown + Time.deltaTime;
-        float calc_cooldown = heroStateMaschine.cur_colldown / heroStateMaschine.max_colldown;
+        heroStateMaschine.hero.cur_colldown = heroStateMaschine.hero.cur_colldown + Time.deltaTime;
+        float calc_cooldown = heroStateMaschine.hero.cur_colldown / heroStateMaschine.hero.max_colldown;
         // 将给定值限制在给定的最小浮点值和最大浮点值之间。
         // 如果给定值在最小值和最大值范围内，则返回给定值。
         //显示进度条图片的进度
@@ -32,7 +32,7 @@ public class HeroProcessingState : FSMState
             Mathf.Clamp(calc_cooldown, 0, 1),
             heroStateMaschine.ProgressBar.transform.localScale.y,
             heroStateMaschine.ProgressBar.transform.localScale.z);
-        if (heroStateMaschine.cur_colldown >= heroStateMaschine.max_colldown)//如果冷却时间到了
+        if (heroStateMaschine.hero.cur_colldown >= heroStateMaschine.hero.max_colldown)//如果冷却时间到了
             heroStateMaschine.heroFSMSystem.ChangeGameState(HeroStateMaschine.TurnState.ADDTOLIST.ToString(), heroStateMaschine);
     }
 }

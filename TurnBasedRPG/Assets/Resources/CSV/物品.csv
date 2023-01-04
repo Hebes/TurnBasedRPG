@@ -1,0 +1,15 @@
+﻿"注释:
+表格生成前请去除空行操作步骤为:开始->查找->定位->选择空值->确定",,,Consumables:消耗品 BothHandsEquipment：双手装备 SingleHandsEquipment：单手装备：两只手其中一个都行 LeftHandsEquipment:左手装备,,,,,
+生成的类名和文件名:,Item,,,,,,,
+序号,名称,描述,类型,是否可堆叠,数量,生命,防御,攻击力
+int,string,string,string,bool,int,int,float,float
+ID,Name,Description,Type,IsStack,Amount,HP,Def,Atk
+1,回血药水(小),这个描述是回血药水(小)HP+10,Consumables,TRUE,99,10,0,0
+2,回血药水(大),这个描述是回血药水(大)HP+50,Consumables,TRUE,98,50,0,0
+3,回魔药水(小),这个描述是回魔药水(小)MP+10,Consumables,TRUE,88,10,0,0
+4,回魔药水(大),这个描述是回魔药水(大)MP+50,Consumables,TRUE,77,50,0,0
+5,铠甲1,这个描述是铠甲1,BodyEquipment,FALSE,1,0,10,0
+6,双手剑,这个描述是双手剑,BothHandsEquipment,FALSE,1,0,0,30
+7,盾牌,这个描述是盾牌,SingleHandsEquipment,FALSE,1,0,15,0
+8,左手剑,这个描述是左手剑,LeftHandsEquipment,FALSE,1,0,15,10
+9,右手剑,这个描述是右手剑,RightHandsEquipment,FALSE,1,0,0,10

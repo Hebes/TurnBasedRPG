@@ -15,8 +15,8 @@ public class WorldSceneManager : MonoBehaviour
         GameRoot gameRoot = GameRoot.Instance;
         gameRoot.sceneManager.Region = null;
         //添加该场景的怪物
-        int id = gameRoot.dataMgr.sceneInfo.Find((sceneInfo) => { return sceneInfo.Scene.Equals(SceneManager.GetActiveScene().name); }).ID;
-        SceneInfo sceneInfo = gameRoot.dataMgr.GetData(gameRoot.dataMgr.sceneInfo, id);
+        int id = gameRoot.dataMgr.sceneInfoLists.Find((sceneInfo) => { return sceneInfo.Scene.Equals(SceneManager.GetActiveScene().name); }).ID;
+        SceneInfo sceneInfo = gameRoot.dataMgr.GetData(gameRoot.dataMgr.sceneInfoLists, id);
         gameRoot.sceneManager.Region = new SceneMG.RegionData()
         {
             regionName = sceneInfo.Scene,

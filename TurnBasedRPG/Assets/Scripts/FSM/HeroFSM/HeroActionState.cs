@@ -64,7 +64,7 @@ internal class HeroActionState : FSMState
             //等待状态
             heroStateMaschine.BM.BattleManagerFSMSystem.ChangeGameState(BattleManager.PerformAction.WAIT.ToString());
             //重置英雄状态
-            heroStateMaschine.cur_colldown = 0f;
+            heroStateMaschine.hero.cur_colldown = 0f;
             heroStateMaschine.heroFSMSystem.ChangeGameState(HeroStateMaschine.TurnState.PROCESSING.ToString());
         }
         else

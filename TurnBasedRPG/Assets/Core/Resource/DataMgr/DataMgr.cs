@@ -17,9 +17,10 @@ public class DataMgr : BaseManager<DataMgr>
     /// <summary>技能数据</summary>
     public List<SkillsInfo> SkillLists { get; private set; }
     /// <summary>怪物信息</summary>
-    public List<EnemyInfo> enemyInfo { get; private set; }
+    public List<EnemyInfo> enemyInfoLists { get; private set; }
     /// <summary>场景配置表</summary>
-    public List<SceneInfo> sceneInfo { get; private set; }
+    public List<SceneInfo> sceneInfoLists { get; private set; }
+    public List<ItemInfo> ItemInfoLists { get; private set; }
 
     /// <summary>
     /// 获取数据
@@ -39,8 +40,9 @@ public class DataMgr : BaseManager<DataMgr>
     private void DataLoadAndAnalysis()
     {
         SkillLists= CSVAnalysis<SkillsInfo>(ResModule.Instance.Load<TextAsset>("CSV/技能"));
-        enemyInfo = CSVAnalysis<EnemyInfo>(ResModule.Instance.Load<TextAsset>("CSV/怪物"));//Assets/Resources/CSV/物理.csv
-        sceneInfo = CSVAnalysis<SceneInfo>(ResModule.Instance.Load<TextAsset>("CSV/场景配置表"));//Assets/Resources/CSV/物理.csv
+        enemyInfoLists = CSVAnalysis<EnemyInfo>(ResModule.Instance.Load<TextAsset>("CSV/怪物"));//Assets/Resources/CSV/物理.csv
+        sceneInfoLists = CSVAnalysis<SceneInfo>(ResModule.Instance.Load<TextAsset>("CSV/场景配置表"));//Assets/Resources/CSV/物理.csv
+        ItemInfoLists = CSVAnalysis<ItemInfo>(ResModule.Instance.Load<TextAsset>("CSV/物品"));//Assets/Resources/CSV/物理.csv
     }
 
     /// <summary>

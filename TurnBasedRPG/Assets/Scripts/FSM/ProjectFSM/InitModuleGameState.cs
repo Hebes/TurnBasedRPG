@@ -49,7 +49,7 @@ internal class InitModuleGameState : FSMState
             enableSave = isLogPrint,
             eLoggerType = LoggerType.Unity,
 #if !UNITY_EDITOR
-            savePath = $"{Application.persistentDataPath}/LogOut/ActiveLog/",
+            //savePath = $"{Application.persistentDataPath}/LogOut/ActiveLog/",
 #endif
             savePath = $"{Application.dataPath}/LogOut/ActiveLog/",
             saveName = "Debug主动输出日志.txt",

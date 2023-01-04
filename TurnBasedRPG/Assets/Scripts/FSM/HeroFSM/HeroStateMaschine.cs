@@ -7,6 +7,7 @@ using UnityEngine.UI;
 /// <summary>
 /// 英雄状态管理
 /// </summary>
+[System.Serializable]
 public class HeroStateMaschine : MonoBehaviour
 {
     /// <summary>回合状态</summary>
@@ -44,10 +45,7 @@ public class HeroStateMaschine : MonoBehaviour
     /// <summary>英雄属性基类</summary>
     public BaseHero hero;
 
-    /// <summary>当前冷却时间</summary>
-    public float cur_colldown { get; set; } = 0f;
-    /// <summary>最长冷却时间</summary>
-    public float max_colldown { get; set; } = 5f;
+    
     /// <summary>冷却版进度条</summary>
     public Image ProgressBar;
     /// <summary>选择器物体 就是角色头上顶的黄色小物体</summary>
@@ -98,7 +96,7 @@ public class HeroStateMaschine : MonoBehaviour
 
         //设置初始
         startPosition = transform.position;
-        cur_colldown = UnityEngine.Random.Range(0, 2.5f);
+        hero.cur_colldown = UnityEngine.Random.Range(0, 2.5f);
         T_SelectorTransform.SetActive(false);
 
         //创建状态机

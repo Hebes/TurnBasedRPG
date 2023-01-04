@@ -58,7 +58,7 @@ internal class EnemyActionState : FSMState
         //结束协程
         actionStarted = false;
         //重置敌人状态
-        enemyStateMaschine.cur_colldown = 0f;
+        enemyStateMaschine.enemy.cur_colldown = 0f;
         //进入冷却条上升状态
         enemyStateMaschine.enemyFSMSystem.ChangeGameState(EnemyStateMaschine.TurnState.PROCESSING.ToString());
     }
